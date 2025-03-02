@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite tests="3" failures="10">
+<testcase classname="./src/navi_men.sh" name="./src/navi_men.sh">
+<failure type="ShellCheck.SC2034">Line 87: JSON_KEY_SHARED_OBJECT_METADATA appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 89: JSON_KEY_METADATA_ATTR_ASCII_ART appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 90: JSON_KEY_METADATA_ATTR_DESCRIPTION appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 91: JSON_KEY_METADATA_ATTR_CAPTION appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 92: JSON_KEY_METADATA_ATTR_NAME appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 108: VALID_CONFIG_ATTRIBUTES appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 125: VALID_MODE_OBJECT_ATTRIBUTES appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 139: ESSENTIAL_JSON_CORE_OBJECTS appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+<failure type="ShellCheck.SC2034">Line 149: VALID_METADATA_ATTRIBUTES appears unused. Verify use (or export if used externally). See https://www.shellcheck.net/wiki/SC2034</failure>
+</testcase>
+<testcase classname="./docker/run.sh" name="./docker/run.sh">
+<failure type="ShellCheck.SC1091">Line 20: Not following: ./docker/config.sh was not specified as input (see shellcheck -x). See https://www.shellcheck.net/wiki/SC1091</failure>
+</testcase>
+<testcase classname="./test/scripts/run_bats.sh" name="./test/scripts/run_bats.sh">
+</testcase>
+</testsuite>
