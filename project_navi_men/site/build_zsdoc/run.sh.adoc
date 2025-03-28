@@ -1,0 +1,117 @@
+run.sh(1)
+=========
+:compat-mode!:
+
+NAME
+----
+run.sh - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ buildDocker
+ dockerBuildCmd
+ intoDocker
+ parseInputs
+ removeDocker
+ runCommand
+ startDocker
+ stopDocker
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 27 line(s). Calls functions:
+
+ Script-Body
+ `-- parseInputs
+
+buildDocker
+~~~~~~~~~~~
+
+Has 1 line(s). Calls functions:
+
+ buildDocker
+ `-- dockerBuildCmd
+
+Called by:
+
+ runCommand
+
+dockerBuildCmd
+~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ 
+____
+
+Has 1 line(s). Doesn't call other functions.
+
+Called by:
+
+ buildDocker
+
+intoDocker
+~~~~~~~~~~
+
+Has 6 line(s). Calls functions:
+
+ intoDocker
+ `-- startDocker
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+
+parseInputs
+~~~~~~~~~~~
+
+Has 20 line(s). Doesn't call other functions.
+
+Called by:
+
+ Script-Body
+
+removeDocker
+~~~~~~~~~~~~
+
+Has 6 line(s). Doesn't call other functions.
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+
+runCommand
+~~~~~~~~~~
+
+Has 9 line(s). Calls functions:
+
+ runCommand
+ |-- buildDocker
+ |   `-- dockerBuildCmd
+ `-- startDocker
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+
+startDocker
+~~~~~~~~~~~
+
+Has 14 line(s). Doesn't call other functions.
+
+Called by:
+
+ intoDocker
+ runCommand
+
+stopDocker
+~~~~~~~~~~
+
+Has 6 line(s). Doesn't call other functions.
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+

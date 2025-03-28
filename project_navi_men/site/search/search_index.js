@@ -1,0 +1,1 @@
+var __index = {"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"readme.html","title":"Empty Readme","text":"<p>hello dude hello dude hello dude hello dude hello dude hello dude hello dude hello dude</p> <p>coverage_again</p>"},{"location":"build_coverage/coverage.html","title":"Coverage","text":"<p>COVERAGE</p>"}]}

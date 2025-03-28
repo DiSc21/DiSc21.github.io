@@ -1,0 +1,35 @@
+if [[ "$#" -ne "3" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+local -r config_json="$1"
+local -r node_name="$2"
+declare -n nr_has_node_return="$3"
+
+if [ ! -f "${config_json}" ]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): configuration json '${config_json}' does not exist!" 1>&2
+  exit "${ERR_FILE_NOT_FOUND}"
+fi
+OIFS="${IFS}"
+IFS='.'
+read -ra jp_nodes <<<"${node_name}"
+IFS="${OIFS}"
+
+local jq_has_cmd=""
+if [[ "$(echo ".${node_name}" | grep -o "\." | wc -l)" == 1 ]]; then
+  jq_has_cmd="has(\"${node_name}\")"
+else
+  for i in "${!jp_nodes[@]}"; do
+    if (("(( i+1 ))" == "${#jp_nodes[@]}")); then
+      jq_has_cmd+=" | has(\"${jp_nodes[-1]}\")"
+    else
+      jq_has_cmd+=".${jp_nodes[${i}]}"
+    fi
+  done
+fi
+
+if [[ "$(jq "${jq_has_cmd}" <"${config_json}")" == true ]]; then
+  nr_has_node_return=1
+else
+  nr_has_node_return=0
+fi

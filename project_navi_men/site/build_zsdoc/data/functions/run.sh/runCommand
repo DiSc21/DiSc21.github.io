@@ -1,0 +1,9 @@
+if [[ -n "${RUNNING_DOCKER_CONTAINER}" ]]; then
+  docker exec -t "${DOCKER_NAME}" /bin/bash -c "$*"
+else
+  if [[ -z "${EXISTING_DOCKER_CONTAINER}" ]]; then
+    buildDocker
+  fi
+  startDocker
+  docker exec -t "${DOCKER_NAME}" /bin/bash -c "$*"
+fi

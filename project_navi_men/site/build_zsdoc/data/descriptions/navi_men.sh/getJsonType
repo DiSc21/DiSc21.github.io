@@ -1,0 +1,12 @@
+## @fn
+##
+## @brief get type of json node
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the json node/field to parse
+## @param3[out] nrstr_get_json_type_return: string describing type of the requested node
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_FILE_NOT_FOUND (via hasNode): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND: if no json-node matching param2 is found
+##

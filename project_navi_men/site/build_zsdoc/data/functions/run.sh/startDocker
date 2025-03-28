@@ -1,0 +1,14 @@
+if [[ -z "${RUNNING_DOCKER_CONTAINER}" ]]; then
+  docker run -td --rm --name "${DOCKER_NAME}" \
+    --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
+    --volume /etc/passwd:/etc/passwd:ro \
+    --volume /etc/group:/etc/group:ro \
+    --user "$(id -u)" \
+    --net=host \
+    --env="DISPLAY" \
+    -v "${PROJECT_ROOT_DIR}":"${PROJECT_ROOT_DIR}" \
+    -w "${PROJECT_ROOT_DIR}" \
+    "${DOCKER_IMAGE_NAME}" /bin/bash
+else
+  echo "[INFO] Docker was already started. If you want to restart call 'make restart'"
+fi

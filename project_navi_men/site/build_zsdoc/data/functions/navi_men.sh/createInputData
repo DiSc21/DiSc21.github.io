@@ -1,0 +1,11 @@
+if [[ $# -lt 2 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires exactly two arguments!" 1>&2
+  exit 1
+fi
+declare -r config_json="$1"
+declare -n nria_create_input_data="$2"
+CMD_POST_PROC_LIST="$(jq -r '.list.cmd_post_proc_list ' <"${config_json}")"
+readonly CMD_POST_PROC_LIST
+CMD_GET_LIST=("$(jq -r '.list.cmd_get_list ' <"${config_json}") | ${CMD_POST_PROC_LIST}")
+readonly CMD_GET_LIST
+read -ra nria_create_input_data <<<"$(eval "${CMD_GET_LIST}" | sed ':a;N;$!ba;s/\n/ /g')"

@@ -1,0 +1,7 @@
+## @fn
+##
+## @brief reads view commands
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] json_view: the currently active view
+##

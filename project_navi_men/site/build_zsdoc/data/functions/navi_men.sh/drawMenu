@@ -1,0 +1,18 @@
+if [[ $# -eq 0 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires a list of menu options to draw!" 1>&2
+  exit 1
+fi
+declare -nr nraa_draw_menu_items="$1"
+declare -nr nraa_draw_menu_opts="$2"
+
+echo "Local GIT Repositories:" >/tmp/local_git_repos
+for i in "${!nraa_draw_menu_items[@]}"; do
+  printf "%3s) %-s\n" "${i}" "${nraa_draw_menu_items[${i}]}" >>/tmp/local_git_repos
+done
+
+echo "Options:" >>/tmp/local_git_repos
+for i in "${!nraa_draw_menu_opts[@]}"; do
+  printf "%3s) %-s\n" "${i}" "${nraa_draw_menu_opts[${i}]}" >>/tmp/local_git_repos
+done
+
+boxes -d columns -p a2v1 /tmp/local_git_repos

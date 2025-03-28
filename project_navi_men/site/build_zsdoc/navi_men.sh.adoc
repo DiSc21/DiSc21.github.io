@@ -1,0 +1,406 @@
+navi_men.sh(1)
+==============
+:compat-mode!:
+
+NAME
+----
+navi_men.sh - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ createInputData
+ createMenuItems
+ createOptionalMenuItems
+ drawMenu
+ getAndCheckStringByKey
+ getJsonType
+ getKeysByNode
+ getNodeAsString
+ getUserInput
+ getValueByKey
+ hasNode
+ navi_men
+ readViewCmds
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 43 line(s). Calls functions:
+
+ Script-Body
+ `-- navi_men
+     |-- createInputData
+     |-- createMenuItems
+     |-- createOptionalMenuItems
+     |   `-- getKeysByNode
+     |       `-- getJsonType
+     |           `-- hasNode
+     |-- drawMenu
+     |-- getAndCheckStringByKey
+     |   `-- getNodeAsString
+     |       `-- getJsonType
+     |           `-- hasNode
+     |-- getKeysByNode
+     |   `-- getJsonType
+     |       `-- hasNode
+     |-- getUserInput
+     |-- getValueByKey
+     `-- readViewCmds
+
+createInputData
+~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief parses configuration json and assembles a vector of string pairs (data, name)
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[out] nria_create_input_data: name-reference to "return" parameter
+ #
+ # @return non
+____
+
+Has 11 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ navi_men
+
+createMenuItems
+~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief create vector of menu options printed in selection menu
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] nraa_get_user_input_menu_items: name-reference for menu items
+ # @param3[in] nraa_get_user_input_menu_opts: name-reference for menu options
+ #
+ # @param4[out] nraa_create_menu_items_return: name-reference for user selection
+ #
+ # @description: The option strings are assembled column wise in nested for loops to
+ # ensure a nicely aligned menu. Hence, the outer for loop takes each column command and
+ # evaluates the command for the current column in the first inner for loop which also
+ # tracks the widest entry. The second inner loop then just fills the elements of the
+ # freshly created options-array with spaces to uniform sizes.
+____
+
+Has 48 line(s). Doesn't call other functions.
+
+Uses feature(s): _eval_
+
+Called by:
+
+ navi_men
+
+createOptionalMenuItems
+~~~~~~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief create vector of optional menu items
+ #
+ # @param1[in]: configuration JSON
+ # @param2[in]: currently active mode
+ #
+ # @param3[out]: associative array to assemble with optional options
+____
+
+Has 25 line(s). Calls functions:
+
+ createOptionalMenuItems
+ `-- getKeysByNode
+     `-- getJsonType
+         `-- hasNode
+
+Called by:
+
+ navi_men
+
+drawMenu
+~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief Draws the menu.
+ #
+ # @param1[in] nraa_draw_menu_items: name-reference for menu items
+ # @param2[in] nraa_draw_menu_opts: name-reference for menu options
+____
+
+Has 18 line(s). Doesn't call other functions.
+
+Called by:
+
+ navi_men
+
+getAndCheckStringByKey
+~~~~~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief read and check validity if default values are given and use first element if not.
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] json_key: the name of the node if want "evaluated"
+ # @param3[in] nrai_get_and_check_value_by_key_valid_values: list of valid default values
+ # @param4[out] nrai_get_keys_by_node_return: string with parsed keys
+ #
+ # @return default value either user defined or just first element in list
+____
+
+Has 31 line(s). Calls functions:
+
+ getAndCheckStringByKey
+ `-- getNodeAsString
+     `-- getJsonType
+         `-- hasNode
+
+Called by:
+
+ navi_men
+
+getJsonType
+~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief get type of json node
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the json node/field to parse
+ # @param3[out] nrstr_get_json_type_return: string describing type of the requested node
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_FILE_NOT_FOUND (via hasNode): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND: if no json-node matching param2 is found
+____
+
+Has 17 line(s). Calls functions:
+
+ getJsonType
+ `-- hasNode
+
+Called by:
+
+ getKeysByNode
+ getNodeAsString
+
+getKeysByNode
+~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief read configuration fields
+ #
+ # @note only json-objects allowed.
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the json node/field to parse
+ # @param3[out] nrai_get_keys_by_node_return: string with parsed keys
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE: if json-node is not a json-object
+____
+
+Has 15 line(s). Calls functions:
+
+ getKeysByNode
+ `-- getJsonType
+     `-- hasNode
+
+Uses feature(s): _read_
+
+Called by:
+
+ createOptionalMenuItems
+ navi_men
+
+getNodeAsString
+~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief read string/number/boolean-node as string and throw error for other json-node-types
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the name of the node if want "evaluated"
+ # @param3[out] nrstr_get_value_by_key_return: string with parsed keys
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE: if json-node is not a json-object
+____
+
+Has 17 line(s). Calls functions:
+
+ getNodeAsString
+ `-- getJsonType
+     `-- hasNode
+
+Called by:
+
+ getAndCheckStringByKey
+
+getUserInput
+~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief get user input the menu.
+ #
+ # @param1[in] nraa_get_user_input_menu_items: name-reference for menu items
+ # @param2[in] nraa_get_user_input_menu_opts: name-reference for menu options
+ #
+ # @param3[out] string_get_user_input_return: name-reference for user selection
+____
+
+Has 23 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ navi_men
+
+getValueByKey
+~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief read and check validity if default values are given and use first element if not.
+ #
+ # @param3 list of valid default values
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the json node/field to parse
+ # @param2 name of the node keys  to read
+ # @param3[out] nrai_get_keys_by_node_return: string with parsed keys
+ #
+ # @return default value either user defined or just first element in list
+____
+
+Has 29 line(s). Doesn't call other functions.
+
+Called by:
+
+ navi_men
+
+hasNode
+~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief check if a json node exists
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the json node/field to parse
+ # @param3[out] nr_has_node_return: boolean return
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_FILE_NOT_FOUND: if config json not found
+ #
+ # @return true or falls via echo
+____
+
+Has 35 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ getJsonType
+
+navi_men
+~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief .
+ #
+ # @param:
+____
+
+Has 31 line(s). Calls functions:
+
+ navi_men
+ |-- createInputData
+ |-- createMenuItems
+ |-- createOptionalMenuItems
+ |   `-- getKeysByNode
+ |       `-- getJsonType
+ |           `-- hasNode
+ |-- drawMenu
+ |-- getAndCheckStringByKey
+ |   `-- getNodeAsString
+ |       `-- getJsonType
+ |           `-- hasNode
+ |-- getKeysByNode
+ |   `-- getJsonType
+ |       `-- hasNode
+ |-- getUserInput
+ |-- getValueByKey
+ `-- readViewCmds
+
+Called by:
+
+ Script-Body
+
+readViewCmds
+~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief reads view commands
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] json_view: the currently active view
+____
+
+Has 17 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ navi_men
+

@@ -1,0 +1,23 @@
+if [[ $# -ne 3 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires exactly three arguments but got $# arguments!" 1>&2
+  exit 1
+fi
+declare -nr nraa_get_user_input_menu_items=$1
+declare -nr nraa_get_user_input_menu_opts=$2
+declare -n string_get_user_input_return=$3
+declare is_valid=0
+input_prompt="Select next action: "
+while [[ ${is_valid} == 0 ]]; do
+  read -rp "${input_prompt}" choice
+
+  if [[ "${nraa_get_user_input_menu_items["${choice}"]+true}" ]] && true; then
+    string_get_user_input_return="${choice}"
+    is_valid=1
+  elif [[ "${nraa_get_user_input_menu_opts["${choice}"]+true}" ]] && true; then
+    string_get_user_input_return="${choice}"
+    is_valid=1
+  else
+    echo "Invalid input: '${choice}' is neither in '[0, ${#nraa_get_user_input_menu_items[@]}]' nor '{${!nraa_get_user_input_menu_opts[*]}}'"
+    input_prompt="Let's try it again: "
+  fi
+done

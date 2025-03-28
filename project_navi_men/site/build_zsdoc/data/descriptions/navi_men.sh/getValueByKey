@@ -1,0 +1,12 @@
+## @fn
+##
+## @brief read and check validity if default values are given and use first element if not.
+##
+## @param3 list of valid default values
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the json node/field to parse
+## @param2 name of the node keys  to read
+## @param3[out] nrai_get_keys_by_node_return: string with parsed keys
+##
+## @return default value either user defined or just first element in list
+##
