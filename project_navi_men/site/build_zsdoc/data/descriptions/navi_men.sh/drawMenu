@@ -1,7 +1,0 @@
-## @fn
-##
-## @brief Draws the menu.
-##
-## @param1[in] nraa_draw_menu_items: name-reference for menu items
-## @param2[in] nraa_draw_menu_opts: name-reference for menu options
-##

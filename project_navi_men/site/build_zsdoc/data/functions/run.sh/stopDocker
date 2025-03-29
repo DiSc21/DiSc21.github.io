@@ -1,6 +1,0 @@
-if [[ -n "${RUNNING_DOCKER_CONTAINER}" ]]; then
-  docker stop "${DOCKER_NAME}"
-  echo "Stopped docker '${DOCKER_NAME}'"
-else
-  echo "No docker with name '${DOCKER_NAME}' running."
-fi

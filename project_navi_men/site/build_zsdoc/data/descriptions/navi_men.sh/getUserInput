@@ -1,9 +1,0 @@
-## @fn
-##
-## @brief get user input the menu.
-##
-## @param1[in] nraa_get_user_input_menu_items: name-reference for menu items
-## @param2[in] nraa_get_user_input_menu_opts: name-reference for menu options
-##
-## @param3[out] string_get_user_input_return: name-reference for user selection
-##

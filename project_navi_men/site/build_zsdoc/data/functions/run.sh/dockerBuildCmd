@@ -1,1 +1,0 @@
-DOCKER_BUILDIT=1 docker build -f "${DOCKERFILE}" -t "${DOCKER_IMAGE_NAME}" .

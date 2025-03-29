@@ -1,9 +1,0 @@
-## @fn
-##
-## @brief parses configuration json and assembles a vector of string pairs (data, name)
-##
-## @param1[in] config_json: file name of the json config
-## @param2[out] nria_create_input_data: name-reference to "return" parameter
-##
-## @return non
-##

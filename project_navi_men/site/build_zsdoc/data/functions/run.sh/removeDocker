@@ -1,6 +1,0 @@
-if [[ -n "${EXISTING_DOCKER_CONTAINER}" ]]; then
-  docker rm "${DOCKER_NAME}"
-  echo "Removed docker '${DOCKER_NAME}'"
-else
-  echo "No docker with name '${DOCKER_NAME}' found."
-fi

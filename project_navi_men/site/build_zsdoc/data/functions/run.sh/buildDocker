@@ -1,1 +1,0 @@
-docker images | grep "{$DOCKER_NAME}" | grep "${TAG}" || dockerBuildCmd

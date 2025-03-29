@@ -1,9 +1,0 @@
-## @fn
-##
-## @brief create vector of optional menu items
-##
-## @param1[in]: configuration JSON
-## @param2[in]: currently active mode
-##
-## @param3[out]: associative array to assemble with optional options
-##

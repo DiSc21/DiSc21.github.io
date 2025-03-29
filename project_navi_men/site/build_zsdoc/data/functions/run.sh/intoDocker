@@ -1,6 +1,0 @@
-if [[ -n "${RUNNING_DOCKER_CONTAINER}" ]]; then
-  docker exec -it "${DOCKER_NAME}" /bin/bash
-else
-  startDocker
-  docker exec -it "${DOCKER_NAME}" /bin/bash
-fi
