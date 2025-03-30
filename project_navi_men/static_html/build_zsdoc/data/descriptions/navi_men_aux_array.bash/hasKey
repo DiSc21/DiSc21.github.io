@@ -1,0 +1,7 @@
+## @fn
+##
+## @brief helper function to check if associative array has entry for given key
+##
+## @param1[in] nraa_has_key_array: array to check for key
+## @param2[in] nrstr_has_key_search: key to check if it exists in array param1
+##

@@ -1,0 +1,26 @@
+if [[ $# -ne 2 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_get_user_input_menu="$1"
+declare -n nraa_get_user_input_return="$2"
+
+local -r ns_items_prefix="${NS_MENU_ITEMS}${MULTI_DIM_ARRAY_DELIMITER}"
+local -r ns_opts_prefix="${NS_MENU_OPTIONS}${MULTI_DIM_ARRAY_DELIMITER}"
+
+local is_valid=0
+
+input_prompt="Select next action: "
+while [[ ${is_valid} == 0 ]]; do
+  read -rp "${input_prompt}" choice
+  if [[ "${nraa_get_user_input_menu["${ns_items_prefix}${choice}"]+true}" ]]; then
+    nraa_get_user_input_return="${ns_items_prefix}${choice}"
+    is_valid=1
+  elif [[ "${nraa_get_user_input_menu["${ns_opts_prefix}${choice}"]+true}" ]]; then
+    nraa_get_user_input_return="${ns_opts_prefix}${choice}"
+    is_valid=1
+  else
+    echo "Invalid input: '${choice}' is not in '{${!nraa_get_user_input_menu[*]}}'"
+    input_prompt="Let's try it again: "
+  fi
+done

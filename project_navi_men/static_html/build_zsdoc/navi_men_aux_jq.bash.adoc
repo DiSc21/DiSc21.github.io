@@ -1,0 +1,230 @@
+navi_men_aux_jq.bash(1)
+=======================
+:compat-mode!:
+
+NAME
+----
+navi_men_aux_jq.bash - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ findNodesBySubnode
+ getJsonType
+ getKeysByNode
+ getNodeAsString
+ hasNode
+ readObjectFromJson
+ readObjectMetadataFromJson
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 14 line(s). No functions are called (may set up e.g. command_not_found_handle or call a function indirectly in other way).
+
+Uses feature(s): _source_
+
+findNodesBySubnode
+~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief find all nodes containing a given subnode
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] subnode_name: the subnode which is searched for
+ # @param3[out] nria_find_nodes_by_subnode_list: list of nodes which contain the given subnode param2
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_FILE_NOT_FOUND: if config json not found
+____
+
+Has 25 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+
+getJsonType
+~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief get type of json node
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the json node/field to parse
+ # @param3[out] nrstr_get_json_type_return: string describing type of the requested node
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_JSON_NODE_NOT_FOUND: if no json-node matching param2 is found
+ #
+ # @throws ERR_FILE_NOT_FOUND (via hasNode): if config json not found
+____
+
+Has 17 line(s). Calls functions:
+
+ getJsonType
+ `-- hasNode
+
+Called by:
+
+ getKeysByNode
+ getNodeAsString
+
+getKeysByNode
+~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief read configuration fields
+ #
+ # @note only json-objects allowed.
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the json node/field to parse
+ # @param3[out] nria_get_keys_by_node_return: string with parsed keys
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_JSON_NODE_WRONG_TYPE: if json-node is not a json-object
+ #
+ # @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+____
+
+Has 15 line(s). Calls functions:
+
+ getKeysByNode
+ `-- getJsonType
+     `-- hasNode
+
+Uses feature(s): _read_
+
+Called by:
+
+ navi_men_core_data.bash/createNMObjectList
+
+getNodeAsString
+~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief read string/number/boolean-node as string and throw error for other json-node-types
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the name of the node
+ # @param3[out] nrstr_get_value_by_key_return: string with parsed keys
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_JSON_NODE_WRONG_TYPE: if json-node is not a json-object
+ #
+ # @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+____
+
+Has 17 line(s). Calls functions:
+
+ getNodeAsString
+ `-- getJsonType
+     `-- hasNode
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+
+hasNode
+~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief check if a json node exists
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the json node/field to parse
+ # @param3[out] nr_has_node_return: boolean return
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_FILE_NOT_FOUND: if config json not found
+ #
+ # @return true or falls via echo
+____
+
+Has 35 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ getJsonType
+ readObjectMetadataFromJson
+
+readObjectFromJson
+~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief reads "string-convertible" sub_nodes for a give json node and stores
+ # them in the name-referenced associative-return-array passed in as param3
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the name of the node
+ # @param3[out] nraa_read_object_from_json_return: the navi-men object read from configuration json
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ #
+ # @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE (via getNodeAsString): if json-node is not a string/boolean/number
+____
+
+Has 19 line(s). Doesn't call other functions.
+
+Called by:
+
+ navi_men_core_data.bash/createNMObject
+
+readObjectMetadataFromJson
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief reads "string-convertible" sub_nodes for a give json node and stores
+ # them in the name-referenced associative-return-array passed in as param3
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the name of the node
+ # @param3[out] nraamd_read_object_metadata_from_json_return: the navi-men object read from configuration json
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ #
+ # @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE (via getNodeAsString): if json-node is not a string/boolean/number
+____
+
+Has 34 line(s). Calls functions:
+
+ readObjectMetadataFromJson
+ `-- hasNode
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+

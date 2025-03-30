@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+
+#   __________________________________________________________________
+#  |.================================================================.|
+#  || navi_men_core_data.bash               .::::.                   ||
+#  || -----------------------             .::::::::.                 ||
+#  ||                                     :::::::::::                ||
+#  || @Author: TheDirkKnight              ':::::::::::..             ||
+#  ||                                      :::::::::::::::'          ||
+#  || @Contact:⠀github.com/DiSc21           ':::::::::::.            ||
+#  ||                                         .::::::::::::::'       ||
+#  || @Created: 2025-03-09 15:28:22         .:::::::::::...          ||
+#  ||     .---.                           .::::::::::::::''          ||
+#  ||    /     \                .::.       '::::::::''::::           ||
+#  ||    \.@-@./              .:::::::.      ':::::'  '::::          ||
+#  ||    /`\_/`\            .::::':::::::.    :::::    '::::.        ||
+#  ||   //  _  \\         .:::::' ':::::::::. :::::      ':::.       ||
+#  ||  | \     )|_      .:::::'     ':::::::::.:::::       '::.      ||
+#  || /`\_`>  <_/ \   .::::''         '::::::::::::::       '::.     ||
+#  || \__/'---'\__/ .:::''              '::::::::::::         :::... ||
+#  ||             .:::::                  ':::::::::'        .:' ''''||
+#  ||          ..''''':'                    ':::::.'         ========||
+#  || @Copyright: 2025 (©) TheDirkKnight - https://github.com/DiSc21 ||
+#  ||                                                                ||
+#  || @License: MIT                                                  ||
+#  || - https://github.com/DiSc21/DiSc21.github.io/blob/main/LICENSE ||
+#  ||________________________________________________________________||
+#  |                                                                  |
+#  | This ASCII pic can be found at:                                  |
+#  | https://asciiart.website/index.php?art=people/naked%20ladies     |
+#  |__________________________________________________________________|
+#
+
+##
+## @brief: Helpers for navi-men "core-objects"
+##
+## @dependencies (non-optional):
+## - bash 4.x or higher (for associative-arrays)
+## - bash 4.3 or higher (for name-references)
+## - (implicit) jq
+## - (implicit) sed/grep/...
+##
+
+# just for debugging
+#set -o xtrace
+  # Just some auxiliary const abused as HEADER-GUARD
+
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+
+
+## @fn
+##
+## @brief fill associative-array object with default members if missing
+##
+## @param1[in] nraa_set_object_default_values_defaults: associative-array with default values
+## @param2[out] nraa_set_object_default_values_return: name-referenced associative-result-array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+
+## @fn
+##
+## @brief read json node into associative-array and check if all requirements are met,
+## that is no missing essential fields and no unknown 
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the name of the node
+## @param3[in] nria_create_nm_object_required: indexed array with required keys
+## @param4[in] nraa_create_nm_object_defaults: the name of the node
+## @param5[out] nraa_create_nm_object_return: name-referenced return array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_UNKNOWN_NODE: if unknown/invalid object nodes are found
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+#
+## @throws ERR_FILE_NOT_FOUND (via readObjectFromJson): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+##
+
+
+## @fn
+##
+## @brief create list of objects
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the name of the node
+## @param3[in] nria_create_nm_object_list_required: indexed array with required keys
+## @param4[in] nraa_create_nm_object_list_defaults: the name of the node
+## @param5[out] nraa_create_nm_object_list_return: name-referenced return array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_UNKNOWN_NODE: if unknown/invalid object nodes are found
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+#
+## @throws ERR_FILE_NOT_FOUND (via readObjectFromJson): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+##
+
+
+## @fn
+##
+## @brief create associative array with namespaced metadata for all NM core objects, i.e. modes/views/config
+##
+## @param1[in] config_json: file name of the json config
+## @param2[out] nraamd_create_nm_metadata_return: name-referenced return array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+## @throws ERR_FILE_NOT_FOUND (via hasNode): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via readObjectMetadataFromJson): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectMetadataFromJson): if json-node is not a string/boolean/number
+##
+
+## @fn
+##
+## @brief create associative array with namespaced core data for all NM core objects, i.e. modes/views/config
+##
+## @param1[in] config_json: file name of the json config
+## @param2[out] nraamd_create_nm_core_data_return: name-referenced return array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+## @throws ERR_NM_OBJECT_UNKNOWN_NODE (via createNMObject): if unknown/invalid object nodes are found
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND (via createNMObject): if essential object nodes are missing
+## @throws ERR_FILE_NOT_FOUND (via implicit hasNode): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+##

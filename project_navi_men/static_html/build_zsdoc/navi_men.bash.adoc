@@ -1,0 +1,60 @@
+navi_men.bash(1)
+================
+:compat-mode!:
+
+NAME
+----
+navi_men.bash - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ main
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 17 line(s). Calls functions:
+
+ Script-Body
+ `-- main
+     |-- navi_men_core_data.bash/createNMCoreData
+     |-- navi_men_core_data.bash/createNMMetadata
+     |-- navi_men_draw.bash/getCursorPos
+     |-- navi_men_run.bash/naviMenRun
+     `-- navi_men_state_setter.bash/initNMStates
+
+Uses feature(s): _source_
+
+main
+~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief
+ #
+ # @param1[in] config_json: file name of the json config
+____
+
+Has 27 line(s). Calls functions:
+
+ main
+ |-- navi_men_core_data.bash/createNMCoreData
+ |-- navi_men_core_data.bash/createNMMetadata
+ |-- navi_men_draw.bash/getCursorPos
+ |-- navi_men_run.bash/naviMenRun
+ `-- navi_men_state_setter.bash/initNMStates
+
+Called by:
+
+ Script-Body
+

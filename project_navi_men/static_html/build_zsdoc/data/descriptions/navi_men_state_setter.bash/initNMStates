@@ -1,0 +1,10 @@
+## @fn
+##
+## @brief initialize navi-men states according to core-data (previously read from configuration json)
+##
+## @param1[in] nraa_init_nm_states_core_data: associative array with data read from config.json
+## @param2[out] nraa_init_nm_states_return: associative array to populate with nm_states
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+##

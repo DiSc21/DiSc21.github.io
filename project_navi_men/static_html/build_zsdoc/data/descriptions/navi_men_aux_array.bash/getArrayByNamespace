@@ -1,0 +1,12 @@
+## @fn
+##
+## @brief helper function for faking a multi-dim associative-array
+##
+## @param1[in]  namespace: namespace appended to input-array keys which mimics an additional array dimension
+## @param2[in]  nraa_get_array_by_namespace_input: associative multi-dim-fake array from which namespace-array is "extract"
+##                                                 no assumptions, however, duplicated keys are not possible
+## @param3[out] nraa_get_array_by_namespace_output: associative array with "namespace-extracted"
+##                                                  no assumptions, however, duplicated keys are not possible
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##

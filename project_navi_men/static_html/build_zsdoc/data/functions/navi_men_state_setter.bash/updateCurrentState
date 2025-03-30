@@ -1,0 +1,38 @@
+if [[ $# -ne 4 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires four arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+local -r valid_list="$1"
+local -r select_next="$2"
+local -r state_key="$3"
+declare -n  nraa_update_current_state_nm_states="$4"
+
+local v_arr="( ${valid_list} )"
+read -ra v_arr<<<"${valid_list}"
+readonly v_arr
+
+local index=-1
+local -r size="${#v_arr[@]}"
+
+if [[ $(hasKey nraa_update_current_state_nm_states state_key) == "true" ]]; then
+  local -r active_key="${nraa_update_current_state_nm_states["${state_key}"]}"
+else
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' Could not find a state named '${state_key}'!" 1>&2
+  exit "${ERR_MENU_UNKNOWN_STATE}"
+fi
+
+for i in "${!v_arr[@]}"; do
+  [[ "${v_arr[$i]}" = "${active_key}" ]] && index="$(( i + size ))" && break
+done
+
+if [[ "${index}" -lt 0 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' Could not find '${active_key}' in '${valid_list}'!" 1>&2
+  exit "${ERR_MENU_INVALID_CURRENT_STATE}"
+elif [[ "${select_next}" = "true" ]]; then
+  ((++index))
+else
+  index="$((index+size))"
+  ((--index))
+fi
+index="$(( index % size))"
+nraa_update_current_state_nm_states["${state_key}"]="${v_arr["${index}"]}"

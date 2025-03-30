@@ -1,0 +1,95 @@
+navi_men_menu.bash(1)
+=====================
+:compat-mode!:
+
+NAME
+----
+navi_men_menu.bash - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ createMenu
+ createMenuItems
+ createMenuOptions
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 18 line(s). No functions are called (may set up e.g. command_not_found_handle or call a function indirectly in other way).
+
+Uses feature(s): _source_
+
+createMenu
+~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief create vector of optional menu items
+ #
+ # @param1[in]: nraa_create_menu_nm_states: associative array with current navi-men states
+ # @param2[out]: nraa_create_menu_return: associative array with items and options by key
+____
+
+Has 13 line(s). Calls functions:
+
+ createMenu
+ |-- createMenuItems
+ |-- createMenuOptions
+ `-- navi_men_aux_array.bash/addNamespacedArray
+
+Called by:
+
+ navi_men_run.bash/naviMenRun
+
+createMenuItems
+~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief create vector of menu options printed in selection menu
+ #
+ # @param1[in] nraa_create_menu_items_nm_states: current navi-men states
+ # @param2[out] nraa_create_menu_items_return: name-reference for user selection
+____
+
+Has 19 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ createMenu
+
+createMenuOptions
+~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief
+ #
+ # @param1[in] nraa_create_menu_options_nm_states: current navi-men states
+ # @param2[out] nraa_create_menu_options_return: associative array to populate with menu options
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+____
+
+Has 30 line(s). Doesn't call other functions.
+
+Called by:
+
+ createMenu
+

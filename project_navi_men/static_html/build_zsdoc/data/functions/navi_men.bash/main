@@ -1,0 +1,27 @@
+if [[ "$#" -ne "1" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires a configuration file!" 1>&2
+  exit "${ERR_INPUT_FILE_MISSING}"
+elif [ ! -e "$(readlink -e "$1")" ]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '$1' seems to not be a regular file!" 1>&2
+  exit "${ERR_INPUT_FILE_NOT_A_REGULAR_FILE}"
+fi
+
+local -r config_json="$(readlink -e "$1")"
+
+local -r tmp_output_dir="/tmp/navi_men_$( date "+%F-%T")_pid_${BASHPID}"
+mkdir "${tmp_output_dir}"
+
+declare -A nm_core_data
+createNMCoreData "${config_json}" nm_core_data
+createNMMetadata "${config_json}" nm_core_data
+readonly nm_core_data
+declare -A nm_states
+initNMStates nm_core_data nm_states
+
+getCursorPos nm_states
+nm_states["${MDKEY_STATE_TERM_INIT_CURS_X}"]="${nm_states["${MDKEY_STATE_TERM_CURS_X}"]}"
+nm_states["${MDKEY_STATE_TERM_INIT_CURS_Y}"]="${nm_states["${MDKEY_STATE_TERM_CURS_Y}"]}"
+declare -A nm_menu_items
+naviMenRun nm_core_data nm_states nm_menu_items tmp_output_dir
+
+rm -rf "${tmp_output_dir}"

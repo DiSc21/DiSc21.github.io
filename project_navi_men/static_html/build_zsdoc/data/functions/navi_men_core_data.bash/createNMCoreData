@@ -1,0 +1,29 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r config_json="$1"
+declare -n nraamd_create_nm_core_data_return="$2"
+local -A config_data=()
+
+createNMObject "${config_json}" \
+               "${JKEY_CORE_OBJECT_CONFIG}" \
+               ESSENTIAL_CONFIG_ATTRIBUTES \
+               OBJ_DEF_CONFIG \
+               config_data
+
+addNamespacedArray "${JKEY_CORE_OBJECT_CONFIG}" config_data nraamd_create_nm_core_data_return
+declare -ar empty_essentials=()
+declare -Ar empty_defaults=()
+
+createNMObjectList "${config_json}" \
+                   "${JKEY_CORE_OBJECT_MODES}" \
+                   ESSENTIAL_MODE_ATTRIBUTES \
+                   OBJ_DEF_MODE \
+                   nraamd_create_nm_core_data_return
+createNMObjectList "${config_json}" \
+                   "${JKEY_CORE_OBJECT_VIEWS}" \
+                   empty_essentials \
+                   empty_defaults \
+                   nraamd_create_nm_core_data_return

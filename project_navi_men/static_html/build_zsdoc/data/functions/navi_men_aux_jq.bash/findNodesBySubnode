@@ -1,0 +1,25 @@
+if [[ "$#" -ne "3" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r config_json="$1"
+local -r subnode_name="$2"
+
+declare -n nria_find_nodes_by_subnode_list="$3"
+nria_find_nodes_by_subnode_list=()
+
+if [ ! -f "${config_json}" ]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): configuration json '${config_json}' does not exist!" 1>&2
+  exit "${ERR_FILE_NOT_FOUND}"
+fi
+
+local full_list=""
+full_list="$(jq 'select(objects)|=[.] | map( paths(scalars) ) | map( map(select(numbers)="[]") | join(".")) | unique' <"${config_json}")"
+readonly full_list
+if grep "${subnode_name}" <<< "${full_list}" > /dev/null 2>&1; then
+  local filtered=""
+  filtered="$(grep "${subnode_name}" <<< "${full_list}" | sed "s/\.*${subnode_name}.*//" | sed 's/"//' | sort -u | sed ':a;N;$!ba;s/\n/ /g')"
+  readonly filtered
+  read -ra nria_find_nodes_by_subnode_list <<<"${filtered}"
+fi

@@ -1,0 +1,117 @@
+navi_men_run.bash(1)
+====================
+:compat-mode!:
+
+NAME
+----
+navi_men_run.bash - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ getUserInput
+ naviMenRun
+ processInput
+ processOptions
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 20 line(s). No functions are called (may set up e.g. command_not_found_handle or call a function indirectly in other way).
+
+Uses feature(s): _source_
+
+getUserInput
+~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief get user input the menu.
+ #
+ # @param1[in] nraa_get_user_input_menu: name-reference for menu items
+ # @param2[out] nraa_get_user_input_return: name-reference return output
+____
+
+Has 26 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ naviMenRun
+
+naviMenRun
+~~~~~~~~~~
+
+Has 19 line(s). Calls functions:
+
+ naviMenRun
+ |-- getUserInput
+ |-- navi_men_draw.bash/drawMenu
+ |-- navi_men_menu.bash/createMenu
+ `-- processInput
+     `-- processOptions
+         `-- navi_men_state_setter.bash/updateCurrentState
+
+Called by:
+
+ navi_men.bash/main
+
+processInput
+~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief process input, i.e. check if item-action or option-action selected and call helper accordingly
+ #
+ # @param1[in] nraa_process_input_menu: name-reference for menu items
+ # @param2[in] nrstr_process_input_selection: namespaced selection
+ # @param3[out] nraa_process_input_nm_states: name-referenced nm_states return
+____
+
+Has 20 line(s). Calls functions:
+
+ processInput
+ `-- processOptions
+     `-- navi_men_state_setter.bash/updateCurrentState
+
+Uses feature(s): _eval_
+
+Called by:
+
+ naviMenRun
+
+processOptions
+~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief get user input the menu.
+ #
+ # @param1[in] nraa_process_options_menu: name-reference for menu items
+ # @param2[in] nrstr_process_options_selection: namespaced selection
+ # @param3[out] nraa_process_options_nm_states: name-referenced nm_states return
+____
+
+Has 66 line(s). Calls functions:
+
+ processOptions
+ `-- navi_men_state_setter.bash/updateCurrentState
+
+Called by:
+
+ processInput
+

@@ -1,0 +1,191 @@
+navi_men_state_setter.bash(1)
+=============================
+:compat-mode!:
+
+NAME
+----
+navi_men_state_setter.bash - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ countModesAndViews
+ initNMStates
+ updateCurrentState
+ updateMetaStates
+ updateModeStates
+ updateNMStates
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 16 line(s). No functions are called (may set up e.g. command_not_found_handle or call a function indirectly in other way).
+
+Uses feature(s): _source_
+
+countModesAndViews
+~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief
+ #
+ # @param1[in] nraa_count_modes_and_views_core_data: associative array with data read from config.json
+ # @param2[out] nraa_count_modes_and_views_return: associative array to populate with nm_states
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+____
+
+Has 28 line(s). Calls functions:
+
+ countModesAndViews
+ `-- navi_men_aux_array.bash/getArrayByNamespace
+
+Uses feature(s): _read_
+
+Called by:
+
+ initNMStates
+
+initNMStates
+~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief initialize navi-men states according to core-data (previously read from configuration json)
+ #
+ # @param1[in] nraa_init_nm_states_core_data: associative array with data read from config.json
+ # @param2[out] nraa_init_nm_states_return: associative array to populate with nm_states
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+____
+
+Has 100 line(s). Calls functions:
+
+ initNMStates
+ |-- countModesAndViews
+ |   `-- navi_men_aux_array.bash/getArrayByNamespace
+ |-- navi_men_aux_array.bash/getArrayByNamespace
+ `-- updateNMStates
+     |-- updateMetaStates
+     |   `-- navi_men_aux_array.bash/getArrayByNamespace
+     `-- updateModeStates
+         `-- navi_men_aux_array.bash/getArrayByNamespace
+
+Called by:
+
+ navi_men.bash/main
+
+updateCurrentState
+~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief
+ #
+ # @param1[in] valid_list: space separted list
+ # @param2[in] select_next: defines if previous or next element should be taken
+ # @param3[in] state_key: key of the state to be updated
+ # @param4[out] nraa_update_current_state_nm_states: name-referenced nm_states return
+____
+
+Has 38 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ navi_men_run.bash/processOptions
+
+updateMetaStates
+~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief
+ #
+ # @param1[in] nraa_update_meta_states_core_data: associative array with data read from config.json
+ # @param2[out] nraa_update_meta_states_return: associative array to populate with nm_states
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+____
+
+Has 27 line(s). Calls functions:
+
+ updateMetaStates
+ `-- navi_men_aux_array.bash/getArrayByNamespace
+
+Called by:
+
+ updateNMStates
+
+updateModeStates
+~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief
+ #
+ # @param1[in] nraa_update_mode_states_core_data: associative array with data read from config.json
+ # @param2[out] nraa_update_mode_states_return: associative array to populate with nm_states
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+____
+
+Has 48 line(s). Calls functions:
+
+ updateModeStates
+ `-- navi_men_aux_array.bash/getArrayByNamespace
+
+Called by:
+
+ updateNMStates
+
+updateNMStates
+~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief wrapper calling different update functions
+ #
+ # @param1[in] nraa_update_nm_states_core_data: associative array with data read from config.json
+ # @param2[out] nraa_update_nm_states_return: associative array to populate with nm_states
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+____
+
+Has 9 line(s). Calls functions:
+
+ updateNMStates
+ |-- updateMetaStates
+ |   `-- navi_men_aux_array.bash/getArrayByNamespace
+ `-- updateModeStates
+     `-- navi_men_aux_array.bash/getArrayByNamespace
+
+Called by:
+
+ initNMStates
+

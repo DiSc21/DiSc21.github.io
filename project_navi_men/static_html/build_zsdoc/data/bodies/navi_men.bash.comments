@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+
+#   __________________________________________________________________
+#  |.================================================================.|
+#  || navi_men.bash                         .::::.                   ||
+#  || -------------                       .::::::::.                 ||
+#  ||                                     :::::::::::                ||
+#  || @Author: TheDirkKnight              ':::::::::::..             ||
+#  ||                                      :::::::::::::::'          ||
+#  || @Contact:⠀github.com/DiSc21           ':::::::::::.            ||
+#  ||                                         .::::::::::::::'       ||
+#  || @Created: 2025-02-22 10:35:53         .:::::::::::...          ||
+#  ||     .---.                           .::::::::::::::''          ||
+#  ||    /     \                .::.       '::::::::''::::           ||
+#  ||    \.@-@./              .:::::::.      ':::::'  '::::          ||
+#  ||    /`\_/`\            .::::':::::::.    :::::    '::::.        ||
+#  ||   //  _  \\         .:::::' ':::::::::. :::::      ':::.       ||
+#  ||  | \     )|_      .:::::'     ':::::::::.:::::       '::.      ||
+#  || /`\_`>  <_/ \   .::::''         '::::::::::::::       '::.     ||
+#  || \__/'---'\__/ .:::''              '::::::::::::         :::... ||
+#  ||             .:::::                  ':::::::::'        .:' ''''||
+#  ||          ..''''':'                    ':::::.'         ========||
+#  || @Copyright: 2025 (©) TheDirkKnight - https://github.com/DiSc21 ||
+#  ||                                                                ||
+#  || @License: MIT                                                  ||
+#  || - https://github.com/DiSc21/DiSc21.github.io/blob/main/LICENSE ||
+#  ||________________________________________________________________||
+#  |                                                                  |
+#  | This ASCII pic can be found at:                                  |
+#  | https://asciiart.website/index.php?art=people/naked%20ladies     |
+#  |__________________________________________________________________|
+#
+#
+#                              __
+#                            .d$$b
+#                          .' TO$;\
+#                         /  : TP._;
+#                        / _.;  :Tb|
+#                       /   /   ;j$j
+#                   _.-"       d$$$$
+#                 .' ..       d$$$$;
+#                /  /P'      d$$$$P. |\
+#               /   "      .d$$$P' |\^"l
+#             .'           `T$P^"""""  :
+#         ._.'      _.'                ;
+#      `-.-".-'-' ._.       _.-"    .-"
+#    `.-" _____  ._              .-"
+#   -(.g$$$$$$$b.              .'
+#     ""^^T$$$P^)            .(:
+#       _/  -"  /.'         /:/;
+#    ._.'-'`-'  ")/         /;/;
+# `-.-"..--""   " /         /  ;
+#.-" ..--""        -'          :
+#..--""--.-"         (\      .-(\
+#  ..--""              `-\(\/;`
+#    _.                      :
+#                            ;`-
+#                           :\
+
+##
+## @brief: Json based navigation menu for bash inspired by
+## the X11 menu-app jgmenu https://github.com/jgmenu/jgmenu
+##
+## @dependencies (non-optional):
+## - bash 4.x or higher (for associative-arrays)
+## - bash 4.3 or higher (for name-references)
+## - jq (for json parsing ... shouldn't be too hard to remove)
+## - sed/awk/grep
+##
+## @dependencies (optional):
+## - lolcat (for fancy colored menues)
+## - boxes (for fancy boxes)
+##
+## @dependencies (optional/planned):
+## - fortune
+## - figlet/toilet
+## - espeak
+##
+## @usage: navimen.sh <config.json>
+##
+
+# @StyleGuide (similar https://google.github.io/styleguide/shellguide.html):
+# - prefer local/readonly over declare
+# - don't use eval ... ( didn't get it to work without yet )
+# - don't use globals out of convenience
+# - add doxygen comments
+#   - first line '## @fn' for bash-doxygen filter
+#   - opening brace '{' in same line as functions declaration
+#   - all "non-trivial" functions should be documented
+# - Variable/Function naming
+#   - camelCase for functions (note: google wants snake_case, me not)
+#   - snake_case_variables
+#   - CAPITAL_WITH_UNDERSCORES consts
+# - weird: prefix name-references with 'nr_'+fun_name to ensure unique name
+# - weird: try to avoid globals
+# - weird: pass non-"name-reference" function-parameters quoted
+
+# just for debugging
+#set -o xtrace
+
+# shellcheck disable=SC1091
+# shellcheck disable=SC1091
+# shellcheck disable=SC1091
+# shellcheck disable=SC1091
+# shellcheck disable=SC1091
+# shellcheck disable=SC1091
+
+
+## @fn
+##
+## @brief
+##
+## @param1[in] config_json: file name of the json config
+##
+
+# batsify script, i.e. ensure nothing is executed if this file is just sourced/loaded

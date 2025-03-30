@@ -1,0 +1,100 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_init_nm_states_core_data="$1"
+declare -n nraa_init_nm_states_return="$2"
+local tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_CMD_GET_LIST}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  nraa_init_nm_states_return["${MDKEY_STATE_LIST_CMD}"]="${nraa_init_nm_states_core_data["${tmp}"]}"
+else
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): cannot update nm-states due to missing core-data: '${tmp}'!" 1>&2
+  exit "${ERR_MULTI_DIM_NAMESPACE_ELEMENT_NOT_FOUND}"
+fi
+
+local tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_CMD_POST_PROC_LIST}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  nraa_init_nm_states_return["${MDKEY_STATE_LIST_CMD_POST_PROC}"]="${nraa_init_nm_states_core_data["${tmp}"]}"
+else
+  nraa_init_nm_states_return["${MDKEY_STATE_LIST_CMD_POST_PROC}"]=""
+fi
+tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_DEFAULT_VIEW}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_CURRENT}"]="${nraa_init_nm_states_core_data["${tmp}"]}"
+else
+  declare -A view_data
+  getArrayByNamespace "${JKEY_CORE_OBJECT_VIEWS}" nraa_init_nm_states_core_data view_data
+  readonly view_data
+  local cur_view
+  for key in "${!view_data[@]}"; do
+    cur_view="${key%"${MULTI_DIM_ARRAY_DELIMITER}"*}"
+    break
+  done
+  readonly cur_view
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_CURRENT}"]="${cur_view}"
+fi
+tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_DEFAULT_MODE}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  nraa_init_nm_states_return["${MDKEY_STATE_MODE_CURRENT}"]="${nraa_init_nm_states_core_data["${tmp}"]}"
+else
+  declare -A mode_data
+  getArrayByNamespace "${JKEY_CORE_OBJECT_MODES}" nraa_init_nm_states_core_data mode_data
+  local cur_mode
+  for key in "${!mode_data[@]}"; do
+    cur_mode="${key%"${MULTI_DIM_ARRAY_DELIMITER}"*}"
+    break
+  done
+  readonly cur_mode
+  nraa_init_nm_states_return["${MDKEY_STATE_MODE_CURRENT}"]="${cur_mode}"
+fi
+
+tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_VIEW_CMD_PRE}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_CMD_PRE}"]="${nraa_init_nm_states_core_data["${tmp}"]}"
+else
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_CMD_PRE}"]=""
+fi
+
+tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_VIEW_CMD_POST}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_CMD_POST}"]="${nraa_init_nm_states_core_data["${tmp}"]}"
+else
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_CMD_POST}"]=""
+fi
+
+tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_SHOW_OPTIONS}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_SHOW_OPTIONS}"]="yes"
+else
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_SHOW_OPTIONS}"]=""
+fi
+
+tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_HAS_COLOR}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  if command -v lolcat >/dev/null 2>&1; then
+    nraa_init_nm_states_return["${MDKEY_STATE_SYS_SUPPORT_COLOR}"]="yes"
+    nraa_init_nm_states_return["${MDKEY_STATE_VIEW_HAS_COLOR}"]="yes"
+  else
+    nraa_init_nm_states_return["${MDKEY_STATE_SYS_SUPPORT_COLOR}"]=""
+    nraa_init_nm_states_return["${MDKEY_STATE_VIEW_HAS_COLOR}"]=""
+  fi
+else
+  nraa_init_nm_states_return["${MDKEY_STATE_SYS_SUPPORT_COLOR}"]=""
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_HAS_COLOR}"]=""
+fi
+
+tmp="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_CONFIG_ATTR_DRAW_BOXES}"
+if [[ "${nraa_init_nm_states_core_data["${tmp}"]+true}" ]]; then
+  if command -v boxes >/dev/null 2>&1; then
+    nraa_init_nm_states_return["${MDKEY_STATE_SYS_SUPPORT_BOXES}"]="yes"
+    nraa_init_nm_states_return["${MDKEY_STATE_VIEW_DRAW_BOXES}"]="yes"
+  else
+    nraa_init_nm_states_return["${MDKEY_STATE_SYS_SUPPORT_BOXES}"]=""
+    nraa_init_nm_states_return["${MDKEY_STATE_VIEW_DRAW_BOXES}"]=""
+  fi
+else
+  nraa_init_nm_states_return["${MDKEY_STATE_SYS_SUPPORT_BOXES}"]=""
+  nraa_init_nm_states_return["${MDKEY_STATE_VIEW_DRAW_BOXES}"]=""
+fi
+countModesAndViews nm_core_data nm_states
+updateNMStates nraa_init_nm_states_core_data nraa_init_nm_states_return

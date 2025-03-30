@@ -1,0 +1,30 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_create_menu_options_nm_states="$1"
+declare -n  nraa_create_menu_options_return="$2"
+
+nraa_create_menu_options_return=()
+
+if [[ "${nraa_create_menu_options_nm_states["${MDKEY_STATE_MODE_NUMBER}"]}" -gt 0 ]]; then
+  nraa_create_menu_options_return["${MK_OPT_MODE_NEXT}"]="next mode"
+  nraa_create_menu_options_return["${MK_OPT_MODE_PREV}"]="previous mode"
+fi
+if [[ "${nraa_create_menu_options_nm_states["${MDKEY_STATE_VIEW_NUMBER}"]}" -gt 0 ]]; then
+  nraa_create_menu_options_return["${MK_OPT_VIEW_NEXT}"]="next view"
+  nraa_create_menu_options_return["${MK_OPT_VIEW_PREV}"]="prev view"
+fi
+
+if [ -n "${nraa_create_menu_options_nm_states["${MDKEY_STATE_MODE_ENABLE_ALL}"]}" ]; then
+  nraa_create_menu_options_return["${MK_OPT_APPLY_ALL}"]="apply to all"
+fi
+if [ -n "${nraa_create_menu_options_nm_states["${MDKEY_STATE_SYS_SUPPORT_COLOR}"]}" ]; then
+  nraa_create_menu_options_return["${MK_OPT_COLORIZE}"]="toggle color on/off"
+fi
+if [ -n "${nraa_create_menu_options_nm_states["${MDKEY_STATE_SYS_SUPPORT_BOXES}"]}" ]; then
+  nraa_create_menu_options_return["${MK_OPT_DRAW_BOXES}"]="toggle boxes on/off"
+fi
+
+nraa_create_menu_options_return["${MK_OPT_SHOW_OPTS}"]="toggle options on/off"
+nraa_create_menu_options_return["${MK_OPT_QUIT}"]="quit"

@@ -1,0 +1,13 @@
+## @fn
+##
+## @brief create associative array with namespaced metadata for all NM core objects, i.e. modes/views/config
+##
+## @param1[in] config_json: file name of the json config
+## @param2[out] nraamd_create_nm_metadata_return: name-referenced return array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+## @throws ERR_FILE_NOT_FOUND (via hasNode): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via readObjectMetadataFromJson): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectMetadataFromJson): if json-node is not a string/boolean/number
+##

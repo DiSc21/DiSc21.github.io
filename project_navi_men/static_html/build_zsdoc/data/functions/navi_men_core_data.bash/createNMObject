@@ -1,0 +1,30 @@
+if [[ "$#" -ne "5" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires five arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r config_json="$1"
+local -r node_name="$2"
+declare -nr nria_create_nm_object_required="$3"
+declare -nr nraa_create_nm_object_defaults="$4"
+declare -n nraa_create_nm_object_return="$5"
+nraa_create_nm_object_return=()
+readObjectFromJson "${config_json}" "${node_name}" nraa_create_nm_object_return
+
+
+local missing_required=""
+findMissingKeys nria_create_nm_object_required nraa_create_nm_object_return missing_required
+if (( "${#missing_required[@]}" )); then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): cannot create navi-men object due to missing required node(s): '${missing_required}'!" 1>&2
+  exit "${ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND}"
+fi
+if [[ -n "${!nraa_create_nm_object_defaults[*]}" ]]; then
+  local -ar valid_elements=("${!nraa_create_nm_object_defaults[@]}")
+  local unknown_elements=""
+  findInvalidKeys valid_elements nraa_create_nm_object_return unknown_elements
+  if (( "${#unknown_elements[@]}" )); then
+    echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): cannot create navi-men object due to unknown node(s): '${unknown_elements}'!" 1>&2
+    exit "${ERR_NM_OBJECT_UNKNOWN_NODE}"
+  fi
+  setObjectDefaultValues nraa_create_nm_object_defaults nraa_create_nm_object_return
+fi

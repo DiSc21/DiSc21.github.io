@@ -1,0 +1,129 @@
+#!/usr/bin/env bash
+
+#   __________________________________________________________________
+#  |.================================================================.|
+#  || navi_men_aux_array.bash               .::::.                   ||
+#  || -----------------------             .::::::::.                 ||
+#  ||                                     :::::::::::                ||
+#  || @Author: TheDirkKnight              ':::::::::::..             ||
+#  ||                                      :::::::::::::::'          ||
+#  || @Contact:⠀github.com/DiSc21           ':::::::::::.            ||
+#  ||                                         .::::::::::::::'       ||
+#  || @Created: 2025-03-08 09:26:02         .:::::::::::...          ||
+#  ||     .---.                           .::::::::::::::''          ||
+#  ||    /     \                .::.       '::::::::''::::           ||
+#  ||    \.@-@./              .:::::::.      ':::::'  '::::          ||
+#  ||    /`\_/`\            .::::':::::::.    :::::    '::::.        ||
+#  ||   //  _  \\         .:::::' ':::::::::. :::::      ':::.       ||
+#  ||  | \     )|_      .:::::'     ':::::::::.:::::       '::.      ||
+#  || /`\_`>  <_/ \   .::::''         '::::::::::::::       '::.     ||
+#  || \__/'---'\__/ .:::''              '::::::::::::         :::... ||
+#  ||             .:::::                  ':::::::::'        .:' ''''||
+#  ||          ..''''':'                    ':::::.'         ========||
+#  || @Copyright: 2025 (©) TheDirkKnight - https://github.com/DiSc21 ||
+#  ||                                                                ||
+#  || @License: MIT                                                  ||
+#  || - https://github.com/DiSc21/DiSc21.github.io/blob/main/LICENSE ||
+#  ||________________________________________________________________||
+#  |                                                                  |
+#  | This ASCII pic can be found at:                                  |
+#  | https://asciiart.website/index.php?art=people/naked%20ladies     |
+#  |__________________________________________________________________|
+
+##
+## @brief: Collection of convenience helpers for bash-array operations
+##
+## @dependencies:
+## - bash 4.x or higher (for associative-arrays)
+## - bash 4.3 or higher (for name-references)
+##
+
+######################################################################
+#    $    $$   $$ $$     $$     $    $$$$$$  $$$$$$     $   $$    $$ #
+#   $$$   $$   $$  $$   $$     $$$   $$   $$ $$   $$   $$$   $$  $$  #
+#  $$ $$  $$   $$   $$ $$     $$ $$  $$   $$ $$   $$  $$ $$   $$$$   #
+# $$   $$ $$   $$    $$$     $$   $$ $$$$$$  $$$$$$  $$   $$   $$    #
+# $$$$$$$ $$   $$   $$ $$    $$$$$$$ $$ $$   $$ $$   $$$$$$$   $$    #
+# $$   $$ $$   $$  $$   $$   $$   $$ $$  $$  $$  $$  $$   $$   $$    #
+# $$   $$  $$$$$  $$     $$  $$   $$ $$   $$ $$   $$ $$   $$   $$    #
+######################################################################
+  # Just some auxiliary const abused as HEADER-GUARD
+
+  # shellcheck disable=SC1091
+  # shellcheck source=navi_men.conf
+
+
+## @fn
+##
+## @brief Check which elements of the string-array passed as param1 are used
+## as key in the associative string-array param2 and collect those strings
+## - which are NOT used as keys - in the name-referenced string-array param3
+##
+## @note The output is inteded to be also used for the creation of complete error reports
+## when testing/validating configuration jsons. Hence, returning string-list instead of boolean.
+##
+## @param1[in]  nria_find_missing_keys_set: the test list with elements to be checked
+##                                          no assumptions, duplicates allowed, not sorted, ...
+## @param2[in]  nraa_find_missing_keys_map: the associative-array with "check"-keys
+##                                          no assumptions, however, duplicated keys are not possible
+## @param3[out] nria_find_missing_keys_missed_keys: return-list of elements not used as key
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+
+## @fn
+##
+## @brief Check if only elements of the string-array passed as param1 are used
+## as key in the associative string-array param2 and collect those strings
+## - which ARE USED as keys - in the name-referenced string-array param3
+##
+## @note Passing an empty list as param2 skips the collection of invald keys.
+##
+## @note The output is inteded to be also used for the creation of complete error reports
+## when testing/validating configuration jsons. Hence, returning string-list instead of boolean.
+##
+## @param1[in]  nria_find_invalid_keys_set: the test list with elements to be checked
+##                                          no assumptions, duplicates allowed, not sorted, ...
+## @param2[in]  nraa_find_invalid_keys_map: the associative-array with "check"-keys
+##                                          no assumptions, however, duplicated keys are not possible
+## @param3[out] nria_find_invalid_keys_missed_keys: return-list of elements not used as key
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+
+## @fn
+##
+## @brief helper function for faking a multi-dim associative-array
+##
+## @note additional dimension is faked by namespace-prefices for keys.
+##
+## @param1[in]  namespace: namespace appended to input-array keys which mimics an additional array dimension
+## @param2[in]  nraa_add_namespaced_array_input: associative-input-array appended to multi-dim-fake param3
+##                                               no assumptions, however, duplicated keys are not possible
+## @param3[out] nraa_add_namespaced_array_output: associative multi-dim-fake array to which array param2 is added
+##                                                no assumptions, however, duplicated keys are not possible
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+
+## @fn
+##
+## @brief helper function for faking a multi-dim associative-array
+##
+## @param1[in]  namespace: namespace appended to input-array keys which mimics an additional array dimension
+## @param2[in]  nraa_get_array_by_namespace_input: associative multi-dim-fake array from which namespace-array is "extract"
+##                                                 no assumptions, however, duplicated keys are not possible
+## @param3[out] nraa_get_array_by_namespace_output: associative array with "namespace-extracted"
+##                                                  no assumptions, however, duplicated keys are not possible
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+
+
+## @fn
+##
+## @brief helper function to check if associative array has entry for given key
+##
+## @param1[in] nraa_has_key_array: array to check for key
+## @param2[in] nrstr_has_key_search: key to check if it exists in array param1
+##

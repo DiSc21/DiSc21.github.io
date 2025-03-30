@@ -1,0 +1,9 @@
+## @fn
+##
+## @brief fill associative-array object with default members if missing
+##
+## @param1[in] nraa_set_object_default_values_defaults: associative-array with default values
+## @param2[out] nraa_set_object_default_values_return: name-referenced associative-result-array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##

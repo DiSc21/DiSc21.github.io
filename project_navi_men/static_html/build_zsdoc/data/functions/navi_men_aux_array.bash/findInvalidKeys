@@ -1,0 +1,21 @@
+if [[ "$#" -ne "3" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nria_find_invalid_keys_set="$1"
+declare -nr nraa_find_invalid_keys_map="$2"
+declare -n nria_find_invalid_keys_missed_keys="$3"
+
+nria_find_invalid_keys_missed_keys=()
+
+if [[ "${#nria_find_invalid_keys_set[@]}" -eq "0" ]]; then
+  return 0
+fi
+
+if (( "${#nraa_find_invalid_keys_map[@]}" )); then
+  for key in "${!nraa_find_invalid_keys_map[@]}"; do
+    if [[ ! " ${nria_find_invalid_keys_set[*]} " =~ [[:space:]]${key}[[:space:]] ]]; then
+      nria_find_invalid_keys_missed_keys+=("${key}");
+    fi
+  done
+fi

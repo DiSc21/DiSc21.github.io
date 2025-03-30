@@ -1,0 +1,19 @@
+if [[ "$#" -ne "3" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r config_json="$1"
+local -r node_name="$2"
+declare -n nraa_read_object_from_json_return="$3"
+
+local -a node_keys=()
+getKeysByNode "${config_json}" "${node_name}" node_keys
+for sub_node in "${node_keys[@]}"; do
+
+  local node_as_string=""
+  if [[ "${sub_node}" != "${JKEY_SHARED_OBJECT_METADATA}" ]]; then
+    getNodeAsString "${config_json}" "${node_name}.${sub_node}" node_as_string
+    nraa_read_object_from_json_return["${sub_node}"]="${node_as_string}"
+  fi
+done

@@ -1,0 +1,65 @@
+if [[ $# -ne 4 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires four arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+local -nr nraa_draw_menu_core_data="$1"
+local -n nraa_draw_menu_nm_states="$2"
+local -nr nraa_draw_menu_items="$3"
+local -nr nraa_draw_menu_tmp_dir="$4"
+
+drawMenuItems nraa_draw_menu_core_data nraa_draw_menu_nm_states nraa_draw_menu_items nraa_draw_menu_tmp_dir
+drawMenuOpts nraa_draw_menu_nm_states nraa_draw_menu_items nraa_draw_menu_tmp_dir
+
+
+local use_boxes="yes"
+if [ -z "${nraa_draw_menu_nm_states["${MDKEY_STATE_SYS_SUPPORT_BOXES}"]}" ]; then
+  use_boxes=""
+elif [ -z "${nraa_draw_menu_nm_states["${MDKEY_STATE_VIEW_DRAW_BOXES}"]}" ]; then
+  use_boxes=""
+fi
+
+local use_color="yes"
+if [ -z "${nraa_draw_menu_nm_states["${MDKEY_STATE_SYS_SUPPORT_COLOR}"]}" ]; then
+  use_color=""
+elif [ -z "${nraa_draw_menu_nm_states["${MDKEY_STATE_VIEW_HAS_COLOR}"]}" ]; then
+  use_color=""
+fi
+
+
+local -r items_file_path="${nraa_draw_menu_tmp_dir}/${FN_MENU_ITEMS}"
+local -r opts_file_path="${nraa_draw_menu_tmp_dir}/${FN_MENU_OPTIONS}"
+
+local output_line_no=0
+
+if [ "${nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_HEIGHT}"]+true}" ]; then
+  nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_PREV_HEIGHT}"]="${nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_HEIGHT}"]}"
+  if [ -z "${nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_MAX_HEIGHT}"]+true}" ]; then
+    nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_MAX_HEIGHT}"]="${nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_HEIGHT}"]}"
+  fi
+else
+  nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_PREV_HEIGHT}"]="${output_line_no}"
+  nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_MAX_HEIGHT}"]="${output_line_no}"
+fi
+
+
+
+if [ -z "${use_boxes}" ]; then
+  output_line_no="$(wc -l "${items_file_path}" "${opts_file_path}" | tail -1 | awk '{print $1;}')"
+  nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_HEIGHT}"]="${output_line_no}"
+  drawMenuPreClear nraa_draw_menu_nm_states
+  if [ -z "${use_color}" ]; then
+    cat "${items_file_path}" "${opts_file_path}"
+  else
+    lolcat -f "${items_file_path}" "${opts_file_path}"
+  fi
+else
+  output_line_no="$(cat "${items_file_path}" "${opts_file_path}" | boxes -d columns -p a2v1 | wc -l | awk '{print $1;}' )"
+  nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_HEIGHT}"]="${output_line_no}"
+  drawMenuPreClear nraa_draw_menu_nm_states
+  if [ -z "${use_color}" ]; then
+    cat "${items_file_path}" "${opts_file_path}" | boxes -d columns -p a2v1
+  else
+    lolcat -f "${items_file_path}" | cat - "${opts_file_path}" | boxes -d columns -p a2v1
+  fi
+fi
+nraa_draw_menu_nm_states["${MDKEY_STATE_OUTPUT_HEIGHT}"]="${output_line_no}"

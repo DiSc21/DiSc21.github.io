@@ -1,0 +1,9 @@
+## @fn
+##
+## @brief
+##
+## @param1[in] nraa_create_menu_options_nm_states: current navi-men states
+## @param2[out] nraa_create_menu_options_return: associative array to populate with menu options
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##

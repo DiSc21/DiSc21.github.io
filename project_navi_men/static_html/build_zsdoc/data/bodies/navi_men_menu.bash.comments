@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+#   __________________________________________________________________
+#  |.================================================================.|
+#  || navi_men_menu.bash                    .::::.                   ||
+#  || ------------------                  .::::::::.                 ||
+#  ||                                     :::::::::::                ||
+#  || @Author: TheDirkKnight              ':::::::::::..             ||
+#  ||                                      :::::::::::::::'          ||
+#  || @Contact:⠀github.com/DiSc21           ':::::::::::.            ||
+#  ||                                         .::::::::::::::'       ||
+#  || @Created: 2025-03-17 11:56:02         .:::::::::::...          ||
+#  ||     .---.                           .::::::::::::::''          ||
+#  ||    /     \                .::.       '::::::::''::::           ||
+#  ||    \.@-@./              .:::::::.      ':::::'  '::::          ||
+#  ||    /`\_/`\            .::::':::::::.    :::::    '::::.        ||
+#  ||   //  _  \\         .:::::' ':::::::::. :::::      ':::.       ||
+#  ||  | \     )|_      .:::::'     ':::::::::.:::::       '::.      ||
+#  || /`\_`>  <_/ \   .::::''         '::::::::::::::       '::.     ||
+#  || \__/'---'\__/ .:::''              '::::::::::::         :::... ||
+#  ||             .:::::                  ':::::::::'        .:' ''''||
+#  ||          ..''''':'                    ':::::.'         ========||
+#  || @Copyright: 2025 (©) TheDirkKnight - https://github.com/DiSc21 ||
+#  ||                                                                ||
+#  || @License: MIT                                                  ||
+#  || - https://github.com/DiSc21/DiSc21.github.io/blob/main/LICENSE ||
+#  ||________________________________________________________________||
+#  |                                                                  |
+#  | This ASCII pic can be found at:                                  |
+#  | https://asciiart.website/index.php?art=people/naked%20ladies     |
+#  |__________________________________________________________________|
+
+##
+## @brief: Collection of convenience helpers for bash-array operations
+##
+## @dependencies:
+## - bash 4.x or higher (for associative-arrays)
+## - bash 4.3 or higher (for name-references)
+##
+  # Just some auxiliary const abused as HEADER-GUARD
+
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+
+## @fn
+##
+## @brief
+##
+## @param1[in] nraa_create_menu_options_nm_states: current navi-men states
+## @param2[out] nraa_create_menu_options_return: associative array to populate with menu options
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+
+## @fn
+##
+## @brief create vector of menu options printed in selection menu
+##
+## @param1[in] nraa_create_menu_items_nm_states: current navi-men states
+## @param2[out] nraa_create_menu_items_return: name-reference for user selection
+##
+
+
+## @fn
+##
+## @brief create vector of optional menu items
+##
+## @param1[in]: nraa_create_menu_nm_states: associative array with current navi-men states
+## @param2[out]: nraa_create_menu_return: associative array with items and options by key
+##

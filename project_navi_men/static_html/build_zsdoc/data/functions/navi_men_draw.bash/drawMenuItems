@@ -1,0 +1,75 @@
+if [[ $# -ne 4 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires four arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+local -nr nraa_draw_menu_items_core_data="$1"
+local -nr nraa_draw_menu_items_nm_states="$2"
+local -nr nraa_draw_menu_items_items="$3"
+local -nr nrstr_draw_menu_items_tmp_dir="$4"
+
+local pre_cmd=""
+local post_cmd=""
+
+if [ -n "${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CMD_PRE}"]+true}" ]; then
+  pre_cmd="${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CMD_PRE}"]}"
+fi
+if [ -n "${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CMD_POST}"]+true}" ]; then
+  post_cmd="${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CMD_POST}"]}"
+fi
+
+
+if [ -z "${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CURRENT}"]+true}" ]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' navi-men state '${MDKEY_STATE_VIEW_CURRENT}' not set!" 1>&2
+  exit "${ERR_DRAW_ITEMS_CURRENT_VIEW_UNDEFINED}"
+fi
+local -r cur_view_ns="${JKEY_CORE_OBJECT_VIEWS}${MULTI_DIM_ARRAY_DELIMITER}${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CURRENT}"]}"
+declare -A views
+declare -A items
+getArrayByNamespace "${cur_view_ns}" nraa_draw_menu_items_core_data views
+getArrayByNamespace "${NS_MENU_ITEMS}" nraa_draw_menu_items_items items
+readonly views
+readonly items
+
+local tmp_item_rows=()
+for key in "${!items[@]}"; do
+  tmp_item_rows["${key}"]=""
+done
+
+local current_column=()
+local column_width=0
+
+for v_cmd in "${views[@]}"; do
+  current_column=()
+  column_width=0
+  for key in $(tr " " "\n" <<<"${!items[@]}" | sort -u ); do
+    local menu_item="${items["${key}"]}"
+    if [ -n "${pre_cmd}" ]; then
+      eval "${pre_cmd}"
+    fi
+
+    menu_txt="$(eval "${v_cmd}")"
+
+    if [ -n "${post_cmd}" ]; then
+      eval "${post_cmd}"
+    fi
+
+    current_column["${key}"]="${menu_txt}"
+    column_width=$(("${#menu_txt}" > "${column_width}" ? "${#menu_txt}" : "${column_width}"))
+  done
+
+  ((++column_width))
+  for key in "${!current_column[@]}"; do
+    tmp_item_rows["${key}"]+="$(printf '%-'"${column_width}"'s' "${current_column[${key}]}")"
+  done
+done
+
+if [ -z "${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CAPTION}"]+true}" ]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' navi-men state '${MDKEY_STATE_VIEW_CAPTION}' not set!" 1>&2
+  exit "${ERR_DRAW_ITEMS_VIEW_CAPTION_UNDEFINED}"
+fi
+local -r items_file_path="${nrstr_draw_menu_items_tmp_dir}/${FN_MENU_ITEMS}"
+printf "%s\n" "${nraa_draw_menu_items_nm_states["${MDKEY_STATE_VIEW_CAPTION}"]}" >"${items_file_path}"
+for menu_item in $(tr " " "\n" <<<"${!tmp_item_rows[@]}" | sort -u ); do
+  printf "%3s) %-s\n" "${menu_item}" "${tmp_item_rows[${menu_item}]}" >>"${items_file_path}"
+done
+printf "\n" >>"${items_file_path}"

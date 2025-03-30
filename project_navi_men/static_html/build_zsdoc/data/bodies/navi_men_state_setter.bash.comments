@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+#   __________________________________________________________________
+#  |.================================================================.|
+#  || navi_men_state_setter.bash            .::::.                   ||
+#  || --------------------------          .::::::::.                 ||
+#  ||                                     :::::::::::                ||
+#  || @Author: TheDirkKnight              ':::::::::::..             ||
+#  ||                                      :::::::::::::::'          ||
+#  || @Contact:⠀github.com/DiSc21           ':::::::::::.            ||
+#  ||                                         .::::::::::::::'       ||
+#  || @Created: 2025-03-15 09:02:48         .:::::::::::...          ||
+#  ||     .---.                           .::::::::::::::''          ||
+#  ||    /     \                .::.       '::::::::''::::           ||
+#  ||    \.@-@./              .:::::::.      ':::::'  '::::          ||
+#  ||    /`\_/`\            .::::':::::::.    :::::    '::::.        ||
+#  ||   //  _  \\         .:::::' ':::::::::. :::::      ':::.       ||
+#  ||  | \     )|_      .:::::'     ':::::::::.:::::       '::.      ||
+#  || /`\_`>  <_/ \   .::::''         '::::::::::::::       '::.     ||
+#  || \__/'---'\__/ .:::''              '::::::::::::         :::... ||
+#  ||             .:::::                  ':::::::::'        .:' ''''||
+#  ||          ..''''':'                    ':::::.'         ========||
+#  || @Copyright: 2025 (©) TheDirkKnight - https://github.com/DiSc21 ||
+#  ||                                                                ||
+#  || @License: MIT                                                  ||
+#  || - https://github.com/DiSc21/DiSc21.github.io/blob/main/LICENSE ||
+#  ||________________________________________________________________||
+#  |                                                                  |
+#  | This ASCII pic can be found at:                                  |
+#  | https://asciiart.website/index.php?art=people/naked%20ladies     |
+#  |__________________________________________________________________|
+
+##
+## @brief: Convenience definitions and helpers for navi_men states
+##
+## @dependencies:
+## - bash 4.x or higher (for associative-arrays)
+##
+  # Just some auxiliary const abused as HEADER-GUARD
+
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+
+
+## @fn
+##
+## @brief
+##
+## @param1[in] valid_list: space separted list
+## @param2[in] select_next: defines if previous or next element should be taken
+## @param3[in] state_key: key of the state to be updated
+## @param4[out] nraa_update_current_state_nm_states: name-referenced nm_states return
+##
+
+
+## @fn
+##
+## @brief
+##
+## @param1[in] nraa_update_meta_states_core_data: associative array with data read from config.json
+## @param2[out] nraa_update_meta_states_return: associative array to populate with nm_states
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+##
+
+
+## @fn
+##
+## @brief
+##
+## @param1[in] nraa_update_mode_states_core_data: associative array with data read from config.json
+## @param2[out] nraa_update_mode_states_return: associative array to populate with nm_states
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+##
+
+## @fn
+##
+## @brief wrapper calling different update functions
+##
+## @param1[in] nraa_update_nm_states_core_data: associative array with data read from config.json
+## @param2[out] nraa_update_nm_states_return: associative array to populate with nm_states
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+
+
+## @fn
+##
+## @brief
+##
+## @param1[in] nraa_count_modes_and_views_core_data: associative array with data read from config.json
+## @param2[out] nraa_count_modes_and_views_return: associative array to populate with nm_states
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+##
+
+
+## @fn
+##
+## @brief initialize navi-men states according to core-data (previously read from configuration json)
+##
+## @param1[in] nraa_init_nm_states_core_data: associative array with data read from config.json
+## @param2[out] nraa_init_nm_states_return: associative array to populate with nm_states
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+##

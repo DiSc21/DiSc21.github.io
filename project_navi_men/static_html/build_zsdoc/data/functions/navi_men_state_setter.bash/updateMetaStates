@@ -1,0 +1,27 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_update_meta_states_core_data="$1"
+declare -n nraa_update_meta_states_return="$2"
+
+local -r cur_view="${JKEY_CORE_OBJECT_VIEWS}${MULTI_DIM_ARRAY_DELIMITER}${nraa_update_meta_states_return["${MDKEY_STATE_VIEW_CURRENT}"]}"
+local -r cur_mode="${JKEY_CORE_OBJECT_MODES}${MULTI_DIM_ARRAY_DELIMITER}${nraa_update_meta_states_return["${MDKEY_STATE_MODE_CURRENT}"]}"
+declare -A aa_metadata
+getArrayByNamespace "${JKEY_SHARED_OBJECT_METADATA}" nraa_update_meta_states_core_data aa_metadata
+readonly aa_metadata
+local -r view_cap="${cur_view}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_METADATA_ATTR_CAPTION}"
+local -r conf_view_cap="${JKEY_CORE_OBJECT_CONFIG}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_METADATA_ATTR_CAPTION}"
+if [[ "${aa_metadata["${view_cap}"]+true}" ]]; then
+  nraa_update_meta_states_return["${MDKEY_STATE_VIEW_CAPTION}"]="${aa_metadata["${view_cap}"]}"
+elif [[ "${aa_metadata["${conf_view_cap}"]+true}" ]]; then
+  nraa_update_meta_states_return["${MDKEY_STATE_VIEW_CAPTION}"]="${aa_metadata["${conf_view_cap}"]}"
+else
+  nraa_update_meta_states_return["${MDKEY_STATE_VIEW_CAPTION}"]=""
+fi
+local -r mode_cap="${cur_mode}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_METADATA_ATTR_CAPTION}"
+if [[ "${aa_metadata["${mode_cap}"]+true}" ]]; then
+  nraa_update_meta_states_return["${MDKEY_STATE_MODE_CAPTION}"]="${aa_metadata["${mode_cap}"]}"
+else
+  nraa_update_meta_states_return["${MDKEY_STATE_MODE_CAPTION}"]=""
+fi

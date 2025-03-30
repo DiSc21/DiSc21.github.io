@@ -1,0 +1,25 @@
+if [[ "$#" -ne "5" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires five arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r config_json="$1"
+local -r node_name="$2"
+declare -nr nria_create_nm_object_list_required="$3"
+declare -nr nraa_create_nm_object_list_defaults="$4"
+declare -n nraamd_create_nm_object_list_return="$5"
+
+local -a obj_list_keys
+getKeysByNode "${config_json}" "${node_name}" obj_list_keys
+readonly obj_list_keys
+
+local -r ns_prefix="${node_name/\./"${MULTI_DIM_ARRAY_DELIMITER}"}${MULTI_DIM_ARRAY_DELIMITER}"
+for obj_key in "${obj_list_keys[@]}"; do
+  local -A object=()
+  createNMObject "${config_json}" \
+                 "${node_name}.${obj_key}" \
+                 nria_create_nm_object_list_required \
+                 nraa_create_nm_object_list_defaults \
+                 object
+  addNamespacedArray "${ns_prefix}${obj_key}" object nraamd_create_nm_object_list_return
+done

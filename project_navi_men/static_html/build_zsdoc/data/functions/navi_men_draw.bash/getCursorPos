@@ -1,0 +1,13 @@
+if [[ $# -ne 1 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires one argument but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -n nraa_get_cursor_pos_nm_states="$1"
+
+local curpos
+read -rsdR -p $'\E[6n' curpos
+curpos=${curpos#*[}
+
+nraa_get_cursor_pos_nm_states["${MDKEY_STATE_TERM_CURS_Y}"]="$( echo "${curpos}" | cut -d ";" -f 1 )"
+nraa_get_cursor_pos_nm_states["${MDKEY_STATE_TERM_CURS_X}"]="$( echo "${curpos}" | cut -d ";" -f 2 )"

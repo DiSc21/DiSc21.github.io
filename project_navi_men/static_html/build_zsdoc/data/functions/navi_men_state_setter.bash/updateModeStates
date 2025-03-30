@@ -1,0 +1,48 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_update_mode_states_core_data="$1"
+declare -n nraa_update_mode_states_return="$2"
+
+
+local -r cur_mode="${JKEY_CORE_OBJECT_MODES}${MULTI_DIM_ARRAY_DELIMITER}${nraa_update_mode_states_return["${MDKEY_STATE_MODE_CURRENT}"]}"
+declare -A aa_cur_mode
+getArrayByNamespace "${cur_mode}" nraa_update_mode_states_core_data aa_cur_mode
+readonly aa_cur_mode
+
+if [[ "${aa_cur_mode["${JKEY_MODE_ATTR_CMD}"]+true}" ]]; then
+  nraa_update_mode_states_return["${MDKEY_STATE_MODE_CMD}"]="${aa_cur_mode["${JKEY_MODE_ATTR_CMD}"]}"
+else
+  local -r missing="${cur_mode}${MULTI_DIM_ARRAY_DELIMITER}${JKEY_MODE_ATTR_CMD}"
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): cannot update nm-states due to missing core-data: '${missing}'!" 1>&2
+  exit "${ERR_MULTI_DIM_NAMESPACE_ELEMENT_NOT_FOUND}"
+fi
+
+
+if [[ "${aa_cur_mode["${JKEY_MODE_ATTR_CONTINUE}"]+true}" ]]; then
+  nraa_update_mode_states_return["${JKEY_MODE_ATTR_CONTINUE}"]="${aa_cur_mode["${JKEY_MODE_ATTR_CONTINUE}"]}"
+else
+  nraa_update_mode_states_return["${JKEY_MODE_ATTR_CONTINUE}"]=""
+fi
+
+
+if [[ "${aa_cur_mode["${JKEY_MODE_ATTR_ENABLE_ALL}"]+true}" ]]; then
+  nraa_update_mode_states_return["${MDKEY_STATE_MODE_ENABLE_ALL}"]="${aa_cur_mode["${JKEY_MODE_ATTR_ENABLE_ALL}"]}"
+else
+  nraa_update_mode_states_return["${MDKEY_STATE_MODE_ENABLE_ALL}"]=""
+fi
+
+
+if [[ "${aa_cur_mode["${JKEY_MODE_ATTR_REFRESH}"]+true}" ]]; then
+  nraa_update_mode_states_return["${MDKEY_STATE_MODE_REFRESH}"]="${aa_cur_mode["${JKEY_MODE_ATTR_REFRESH}"]}"
+else
+  nraa_update_mode_states_return["${MDKEY_STATE_MODE_REFRESH}"]=""
+fi
+
+
+if [[ "${aa_cur_mode["${JKEY_MODE_ATTR_LIST_FILTER}"]+true}" ]]; then
+  nraa_update_mode_states_return["${MDKEY_STATE_MODE_LIST_FILTER}"]="${aa_cur_mode["${JKEY_MODE_ATTR_LIST_FILTER}"]}"
+else
+  nraa_update_mode_states_return["${MDKEY_STATE_MODE_LIST_FILTER}"]=""
+fi

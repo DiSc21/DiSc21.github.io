@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+
+#   __________________________________________________________________
+#  |.================================================================.|
+#  || navi_men_aux_jq.bash                  .::::.                   ||
+#  || --------------------                .::::::::.                 ||
+#  ||                                     :::::::::::                ||
+#  || @Author: TheDirkKnight              ':::::::::::..             ||
+#  ||                                      :::::::::::::::'          ||
+#  || @Contact:⠀github.com/DiSc21           ':::::::::::.            ||
+#  ||                                         .::::::::::::::'       ||
+#  || @Created: 2025-03-08 11:18:37         .:::::::::::...          ||
+#  ||     .---.                           .::::::::::::::''          ||
+#  ||    /     \                .::.       '::::::::''::::           ||
+#  ||    \.@-@./              .:::::::.      ':::::'  '::::          ||
+#  ||    /`\_/`\            .::::':::::::.    :::::    '::::.        ||
+#  ||   //  _  \\         .:::::' ':::::::::. :::::      ':::.       ||
+#  ||  | \     )|_      .:::::'     ':::::::::.:::::       '::.      ||
+#  || /`\_`>  <_/ \   .::::''         '::::::::::::::       '::.     ||
+#  || \__/'---'\__/ .:::''              '::::::::::::         :::... ||
+#  ||             .:::::                  ':::::::::'        .:' ''''||
+#  ||          ..''''':'                    ':::::.'         ========||
+#  || @Copyright: 2025 (©) TheDirkKnight - https://github.com/DiSc21 ||
+#  ||                                                                ||
+#  || @License: MIT                                                  ||
+#  || - https://github.com/DiSc21/DiSc21.github.io/blob/main/LICENSE ||
+#  ||________________________________________________________________||
+#  |                                                                  |
+#  | This ASCII pic can be found at:                                  |
+#  | https://asciiart.website/index.php?art=people/naked%20ladies     |
+#  |__________________________________________________________________|
+
+##
+## @brief: Collection of convenience helpers for jq json parsing.
+##
+## @dependencies (non-optional):
+## - bash 4.x or higher (for associative-arrays)
+## - bash 4.3 or higher (for name-references)
+## - jq (for json parsing)
+## - grep (atm only used once)
+## - sed
+  # Just some auxiliary const abused as HEADER-GUARD
+
+  # shellcheck disable=SC1091
+  # shellcheck source=navi_men.conf
+
+## @fn
+##
+## @brief check if a json node exists
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the json node/field to parse
+## @param3[out] nr_has_node_return: boolean return
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_FILE_NOT_FOUND: if config json not found
+##
+## @return true or falls via echo
+##
+
+## @fn
+##
+## @brief get type of json node
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the json node/field to parse
+## @param3[out] nrstr_get_json_type_return: string describing type of the requested node
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_JSON_NODE_NOT_FOUND: if no json-node matching param2 is found
+##
+## @throws ERR_FILE_NOT_FOUND (via hasNode): if config json not found
+##
+
+## @fn
+##
+## @brief read configuration fields
+##
+## @note only json-objects allowed.
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the json node/field to parse
+## @param3[out] nria_get_keys_by_node_return: string with parsed keys
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_JSON_NODE_WRONG_TYPE: if json-node is not a json-object
+##
+## @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+##
+
+## @fn
+##
+## @brief read string/number/boolean-node as string and throw error for other json-node-types
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the name of the node
+## @param3[out] nrstr_get_value_by_key_return: string with parsed keys
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_JSON_NODE_WRONG_TYPE: if json-node is not a json-object
+##
+## @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+##
+
+## @fn
+##
+## @brief find all nodes containing a given subnode
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] subnode_name: the subnode which is searched for
+## @param3[out] nria_find_nodes_by_subnode_list: list of nodes which contain the given subnode param2
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_FILE_NOT_FOUND: if config json not found
+##
+
+
+## @fn
+##
+## @brief reads "string-convertible" sub_nodes for a give json node and stores
+## them in the name-referenced associative-return-array passed in as param3
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the name of the node
+## @param3[out] nraa_read_object_from_json_return: the navi-men object read from configuration json
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+## @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via getNodeAsString): if json-node is not a string/boolean/number
+##
+
+## @fn
+##
+## @brief reads "string-convertible" sub_nodes for a give json node and stores
+## them in the name-referenced associative-return-array passed in as param3
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the name of the node
+## @param3[out] nraamd_read_object_metadata_from_json_return: the navi-men object read from configuration json
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+## @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via getNodeAsString): if json-node is not a string/boolean/number
+##

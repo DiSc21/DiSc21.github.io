@@ -1,0 +1,19 @@
+if [[ $# -ne 2 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+declare -nr nraa_create_menu_items_nm_states="$1"
+declare -n nraa_create_menu_items_return="$2"
+local -r list_cmd="${nraa_create_menu_items_nm_states[${MDKEY_STATE_LIST_CMD}]}"
+local -r post_proc_cmd="${nraa_create_menu_items_nm_states[${MDKEY_STATE_LIST_CMD_POST_PROC}]}"
+
+local cmd="${list_cmd}"
+if [ -n "${post_proc_cmd}" ] && true; then
+  cmd="${list_cmd} | ${post_proc_cmd}"
+fi
+read -ra indexed_menu_items <<<"$(eval "${cmd}" | sed ':a;N;$!ba;s/\n/ /g')"
+
+for index in "${!indexed_menu_items[@]}"; do
+  nraa_create_menu_items_return["${index}"]="${indexed_menu_items["${index}"]}"
+done

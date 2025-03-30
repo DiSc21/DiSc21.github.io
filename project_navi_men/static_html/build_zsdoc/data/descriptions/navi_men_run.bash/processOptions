@@ -1,0 +1,8 @@
+## @fn
+##
+## @brief get user input the menu.
+##
+## @param1[in] nraa_process_options_menu: name-reference for menu items
+## @param2[in] nrstr_process_options_selection: namespaced selection
+## @param3[out] nraa_process_options_nm_states: name-referenced nm_states return
+##

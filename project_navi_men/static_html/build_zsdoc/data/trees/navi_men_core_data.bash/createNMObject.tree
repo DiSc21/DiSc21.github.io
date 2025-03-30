@@ -1,0 +1,7 @@
+createNMObject
+|-- navi_men_aux_array.bash/findInvalidKeys
+|-- navi_men_aux_array.bash/findMissingKeys
+|-- navi_men_aux_jq.bash/readObjectFromJson
+`-- setObjectDefaultValues
+
+5 directories, 0 files

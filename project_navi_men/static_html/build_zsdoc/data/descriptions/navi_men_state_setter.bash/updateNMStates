@@ -1,0 +1,9 @@
+## @fn
+##
+## @brief wrapper calling different update functions
+##
+## @param1[in] nraa_update_nm_states_core_data: associative array with data read from config.json
+## @param2[out] nraa_update_nm_states_return: associative array to populate with nm_states
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##

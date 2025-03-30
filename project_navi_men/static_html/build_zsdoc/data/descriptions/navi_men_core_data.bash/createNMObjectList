@@ -1,0 +1,18 @@
+## @fn
+##
+## @brief create list of objects
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the name of the node
+## @param3[in] nria_create_nm_object_list_required: indexed array with required keys
+## @param4[in] nraa_create_nm_object_list_defaults: the name of the node
+## @param5[out] nraa_create_nm_object_list_return: name-referenced return array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_NM_OBJECT_UNKNOWN_NODE: if unknown/invalid object nodes are found
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+#
+## @throws ERR_FILE_NOT_FOUND (via readObjectFromJson): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+##

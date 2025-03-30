@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+#   __________________________________________________________________
+#  |.================================================================.|
+#  || navi_men_draw.bash                    .::::.                   ||
+#  || ------------------                  .::::::::.                 ||
+#  ||                                     :::::::::::                ||
+#  || @Author: TheDirkKnight              ':::::::::::..             ||
+#  ||                                      :::::::::::::::'          ||
+#  || @Contact:⠀github.com/DiSc21           ':::::::::::.            ||
+#  ||                                         .::::::::::::::'       ||
+#  || @Created: 2025-03-16 15:27:14         .:::::::::::...          ||
+#  ||     .---.                           .::::::::::::::''          ||
+#  ||    /     \                .::.       '::::::::''::::           ||
+#  ||    \.@-@./              .:::::::.      ':::::'  '::::          ||
+#  ||    /`\_/`\            .::::':::::::.    :::::    '::::.        ||
+#  ||   //  _  \\         .:::::' ':::::::::. :::::      ':::.       ||
+#  ||  | \     )|_      .:::::'     ':::::::::.:::::       '::.      ||
+#  || /`\_`>  <_/ \   .::::''         '::::::::::::::       '::.     ||
+#  || \__/'---'\__/ .:::''              '::::::::::::         :::... ||
+#  ||             .:::::                  ':::::::::'        .:' ''''||
+#  ||          ..''''':'                    ':::::.'         ========||
+#  || @Copyright: 2025 (©) TheDirkKnight - https://github.com/DiSc21 ||
+#  ||                                                                ||
+#  || @License: MIT                                                  ||
+#  || - https://github.com/DiSc21/DiSc21.github.io/blob/main/LICENSE ||
+#  ||________________________________________________________________||
+#  |                                                                  |
+#  | This ASCII pic can be found at:                                  |
+#  | https://asciiart.website/index.php?art=people/naked%20ladies     |
+#  |__________________________________________________________________|
+
+##
+## @brief: Draw functions for "fancy"-configurable menu styles
+##
+## @dependencies:
+## - bash 4.x or higher (for associative-arrays)
+## - bash 4.3 or higher (for name-references)
+##
+## @dependencies (optional):
+## - lolcat (for fancy colored menues)
+## - boxes (for fancy boxes)
+##
+  # Just some auxiliary const abused as HEADER-GUARD
+
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+  # shellcheck disable=SC1091
+
+
+
+## @fn
+##
+## @brief draw menu
+##
+## @param1[in]: : with current navi-men items and options
+##
+
+## @fn
+##
+## @brief draw menu
+##
+## @param1[in]: : with current navi-men items and options
+##
+
+## @fn
+##
+## @brief draw menu
+##
+## @param1[in]: : with current navi-men items and options
+##

@@ -1,0 +1,12 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+declare -nr nraa_set_object_default_values_defaults="$1"
+declare -n nraa_set_object_default_values_return="$2"
+for key in "${!nraa_set_object_default_values_defaults[@]}"; do
+  if [[ ! -v nraa_set_object_default_values_return["${key}"] ]]; then
+    nraa_set_object_default_values_return["${key}"]="${nraa_set_object_default_values_defaults[${key}]}"
+  fi
+done

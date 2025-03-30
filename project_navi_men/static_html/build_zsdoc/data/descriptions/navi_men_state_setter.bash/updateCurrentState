@@ -1,0 +1,9 @@
+## @fn
+##
+## @brief
+##
+## @param1[in] valid_list: space separted list
+## @param2[in] select_next: defines if previous or next element should be taken
+## @param3[in] state_key: key of the state to be updated
+## @param4[out] nraa_update_current_state_nm_states: name-referenced nm_states return
+##

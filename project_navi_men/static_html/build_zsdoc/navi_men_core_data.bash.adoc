@@ -1,0 +1,170 @@
+navi_men_core_data.bash(1)
+==========================
+:compat-mode!:
+
+NAME
+----
+navi_men_core_data.bash - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ createNMCoreData
+ createNMMetadata
+ createNMObject
+ createNMObjectList
+ setObjectDefaultValues
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 16 line(s). No functions are called (may set up e.g. command_not_found_handle or call a function indirectly in other way).
+
+Uses feature(s): _source_
+
+createNMCoreData
+~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief create associative array with namespaced core data for all NM core objects, i.e. modes/views/config
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[out] nraamd_create_nm_core_data_return: name-referenced return array
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ #
+ # @throws ERR_NM_OBJECT_UNKNOWN_NODE (via createNMObject): if unknown/invalid object nodes are found
+ # @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND (via createNMObject): if essential object nodes are missing
+ # @throws ERR_FILE_NOT_FOUND (via implicit hasNode): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+____
+
+Has 29 line(s). Doesn't call other functions.
+
+Called by:
+
+ navi_men.bash/main
+
+createNMMetadata
+~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief create associative array with namespaced metadata for all NM core objects, i.e. modes/views/config
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[out] nraamd_create_nm_metadata_return: name-referenced return array
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ #
+ # @throws ERR_FILE_NOT_FOUND (via hasNode): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via readObjectMetadataFromJson): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectMetadataFromJson): if json-node is not a string/boolean/number
+____
+
+Has 15 line(s). Doesn't call other functions.
+
+Called by:
+
+ navi_men.bash/main
+
+createNMObject
+~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief read json node into associative-array and check if all requirements are met,
+ # that is no missing essential fields and no unknown 
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the name of the node
+ # @param3[in] nria_create_nm_object_required: indexed array with required keys
+ # @param4[in] nraa_create_nm_object_defaults: the name of the node
+ # @param5[out] nraa_create_nm_object_return: name-referenced return array
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_NM_OBJECT_UNKNOWN_NODE: if unknown/invalid object nodes are found
+ # @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+ 
+ # @throws ERR_FILE_NOT_FOUND (via readObjectFromJson): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+____
+
+Has 30 line(s). Calls functions:
+
+ createNMObject
+ |-- navi_men_aux_array.bash/findInvalidKeys
+ |-- navi_men_aux_array.bash/findMissingKeys
+ |-- navi_men_aux_jq.bash/readObjectFromJson
+ `-- setObjectDefaultValues
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+
+createNMObjectList
+~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief create list of objects
+ #
+ # @param1[in] config_json: file name of the json config
+ # @param2[in] node_name: the name of the node
+ # @param3[in] nria_create_nm_object_list_required: indexed array with required keys
+ # @param4[in] nraa_create_nm_object_list_defaults: the name of the node
+ # @param5[out] nraa_create_nm_object_list_return: name-referenced return array
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+ # @throws ERR_NM_OBJECT_UNKNOWN_NODE: if unknown/invalid object nodes are found
+ # @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND: if essential object nodes are missing
+ 
+ # @throws ERR_FILE_NOT_FOUND (via readObjectFromJson): if config json not found
+ # @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+ # @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+____
+
+Has 25 line(s). Calls functions:
+
+ createNMObjectList
+ `-- navi_men_aux_jq.bash/getKeysByNode
+
+Not called by script or any function (may be e.g. command_not_found_handle or called indirectly in other way).
+
+setObjectDefaultValues
+~~~~~~~~~~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief fill associative-array object with default members if missing
+ #
+ # @param1[in] nraa_set_object_default_values_defaults: associative-array with default values
+ # @param2[out] nraa_set_object_default_values_return: name-referenced associative-result-array
+ #
+ # @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+____
+
+Has 12 line(s). Doesn't call other functions.
+
+Called by:
+
+ createNMObject
+

@@ -1,0 +1,9 @@
+naviMenRun
+|-- getUserInput
+|-- navi_men_draw.bash/drawMenu
+|-- navi_men_menu.bash/createMenu
+`-- processInput
+    `-- processOptions
+        `-- navi_men_state_setter.bash/updateCurrentState
+
+7 directories, 0 files

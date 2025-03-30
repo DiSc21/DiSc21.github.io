@@ -1,0 +1,11 @@
+## @fn
+##
+## @brief find all nodes containing a given subnode
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] subnode_name: the subnode which is searched for
+## @param3[out] nria_find_nodes_by_subnode_list: list of nodes which contain the given subnode param2
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+## @throws ERR_FILE_NOT_FOUND: if config json not found
+##

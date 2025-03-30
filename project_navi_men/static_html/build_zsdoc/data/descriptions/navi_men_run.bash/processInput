@@ -1,0 +1,8 @@
+## @fn
+##
+## @brief process input, i.e. check if item-action or option-action selected and call helper accordingly
+##
+## @param1[in] nraa_process_input_menu: name-reference for menu items
+## @param2[in] nrstr_process_input_selection: namespaced selection
+## @param3[out] nraa_process_input_nm_states: name-referenced nm_states return
+##

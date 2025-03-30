@@ -1,0 +1,15 @@
+## @fn
+##
+## @brief create associative array with namespaced core data for all NM core objects, i.e. modes/views/config
+##
+## @param1[in] config_json: file name of the json config
+## @param2[out] nraamd_create_nm_core_data_return: name-referenced return array
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+## @throws ERR_NM_OBJECT_UNKNOWN_NODE (via createNMObject): if unknown/invalid object nodes are found
+## @throws ERR_NM_OBJECT_ESSENTIAL_NODE_NOT_FOUND (via createNMObject): if essential object nodes are missing
+## @throws ERR_FILE_NOT_FOUND (via implicit hasNode): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via readObjectFromJson): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via readObjectFromJson): if json-node is not a string/boolean/number
+##

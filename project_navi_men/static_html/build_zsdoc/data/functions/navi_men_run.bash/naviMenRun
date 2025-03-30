@@ -1,0 +1,19 @@
+if [[ $# -ne 4 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires four arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+local -n nraa_navi_men_run_core_data="$1"
+local -n nraa_navi_men_run_nm_states="$2"
+local -n nraa_navi_men_run_items="$3"
+local -nr nrstr_navi_men_run_tmp_dir="$4"
+local selection=""
+while [[ "${selection}" != "${NS_MENU_OPTIONS}${MULTI_DIM_ARRAY_DELIMITER}q" ]]; do
+  createMenu nraa_navi_men_run_nm_states nraa_navi_men_run_items
+
+  drawMenu nraa_navi_men_run_core_data \
+           nraa_navi_men_run_nm_states \
+           nraa_navi_men_run_items \
+           nrstr_navi_men_run_tmp_dir
+  getUserInput nraa_navi_men_run_items selection
+  processInput nraa_navi_men_run_items selection nraa_navi_men_run_nm_states
+done

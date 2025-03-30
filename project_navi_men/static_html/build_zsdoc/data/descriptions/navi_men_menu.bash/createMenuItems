@@ -1,0 +1,7 @@
+## @fn
+##
+## @brief create vector of menu options printed in selection menu
+##
+## @param1[in] nraa_create_menu_items_nm_states: current navi-men states
+## @param2[out] nraa_create_menu_items_return: name-reference for user selection
+##

@@ -1,0 +1,14 @@
+if [[ "$#" -ne "3" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r namespace="$1${MULTI_DIM_ARRAY_DELIMITER}"
+declare -nr nraa_add_namespaced_array_input="$2"
+declare -n nraa_add_namespaced_array_output="$3"
+
+for key in "${!nraa_add_namespaced_array_input[@]}"; do
+  local value="${nraa_add_namespaced_array_input[${key}]}"
+  local namespaced_key="${namespace}${key}"
+  nraa_add_namespaced_array_output["${namespaced_key}"]="${value}";
+done

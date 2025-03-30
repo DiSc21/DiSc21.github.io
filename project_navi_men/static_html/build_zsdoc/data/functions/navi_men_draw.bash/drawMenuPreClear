@@ -1,0 +1,23 @@
+local -n nraa_draw_menu_pre_clear_nm_states="$1"
+
+output_line_no="${nraa_draw_menu_pre_clear_nm_states["${MDKEY_STATE_OUTPUT_HEIGHT}"]}"
+((++output_line_no))
+
+getCursorPos nraa_draw_menu_nm_states
+
+local -r init_row="${nraa_draw_menu_pre_clear_nm_states["${MDKEY_STATE_TERM_INIT_CURS_Y}"]}"
+local -r cur_row="${nraa_draw_menu_pre_clear_nm_states["${MDKEY_STATE_TERM_CURS_Y}"]}"
+local -r rows="$((cur_row - init_row))"
+
+local blank_no=0
+if [[ "${rows}" -gt "${output_line_no}" ]]; then
+  blank_no="$((rows - output_line_no))"
+fi
+for whocares in $(seq 0 "${rows}"); do
+  tput -T xterm-256color el
+  tput -T xterm-256color cuu1
+done
+for whocares in $(seq 0 "${blank_no}"); do
+  tput -T xterm-256color cud1
+  tput -T xterm-256color el
+done

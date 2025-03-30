@@ -1,0 +1,15 @@
+## @fn
+##
+## @brief reads "string-convertible" sub_nodes for a give json node and stores
+## them in the name-referenced associative-return-array passed in as param3
+##
+## @param1[in] config_json: file name of the json config
+## @param2[in] node_name: the name of the node
+## @param3[out] nraamd_read_object_metadata_from_json_return: the navi-men object read from configuration json
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##
+## @throws ERR_FILE_NOT_FOUND (via getJsonType): if config json not found
+## @throws ERR_JSON_NODE_NOT_FOUND (via getJsonType): if no json-node matching param2 is found
+## @throws ERR_JSON_NODE_WRONG_TYPE (via getNodeAsString): if json-node is not a string/boolean/number
+##

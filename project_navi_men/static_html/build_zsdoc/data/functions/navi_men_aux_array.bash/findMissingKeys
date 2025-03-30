@@ -1,0 +1,21 @@
+if [[ "$#" -ne "3" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nria_find_missing_keys_set="$1"
+declare -nr nraa_find_missing_keys_map="$2"
+declare -n nria_find_missing_keys_missed_keys="$3"
+
+nria_find_missing_keys_missed_keys=()
+
+if (( "${#nraa_find_missing_keys_map[@]}" )); then
+  for item in "${nria_find_missing_keys_set[@]}"; do
+    if [[ ! -v nraa_find_missing_keys_map["${item}"] ]]; then
+      nria_find_missing_keys_missed_keys+=("${item}")
+    fi
+  done
+else
+  for item in "${nria_find_missing_keys_set[@]}"; do
+    nria_find_missing_keys_missed_keys+=("${item}")
+  done
+fi

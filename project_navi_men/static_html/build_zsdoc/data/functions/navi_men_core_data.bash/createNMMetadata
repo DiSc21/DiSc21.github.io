@@ -1,0 +1,15 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r config_json="$1"
+declare -n nraamd_create_nm_metadata_return="$2"
+
+local -a nodes_with_metadata=()
+findNodesBySubnode "${config_json}" "${JKEY_SHARED_OBJECT_METADATA}" nodes_with_metadata
+readonly nodes_with_metadata
+
+for node in "${nodes_with_metadata[@]}"; do
+  readObjectMetadataFromJson "${config_json}" "${node}" nraamd_create_nm_metadata_return
+done

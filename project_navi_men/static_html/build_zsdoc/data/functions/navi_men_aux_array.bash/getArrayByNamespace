@@ -1,0 +1,23 @@
+if [[ "$#" -ne "3" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+
+local -r namespace="$1${MULTI_DIM_ARRAY_DELIMITER}"
+declare -nr nraa_get_array_by_namespace_input="$2"
+declare -n nraa_get_array_by_namespace_output="$3"
+
+local found_namespace=""
+for key in "${!nraa_get_array_by_namespace_input[@]}"; do
+  if [[ "${key}" == "${namespace}"* ]]; then
+    found_namespace="found"
+    local unspaced_key="${key#"${namespace}"}"
+    local value="${nraa_get_array_by_namespace_input[${key}]}"
+    nraa_get_array_by_namespace_output["${unspaced_key}"]="${value}";
+  fi
+done
+
+if [ -z "${found_namespace}" ]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): No namespace '${namespace%"${MULTI_DIM_ARRAY_DELIMITER}"}' in input array!" 1>&2
+  exit "${ERR_MULTI_DIM_NAMESPACE_NOT_FOUND}"
+fi

@@ -1,0 +1,9 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_update_nm_states_core_data="$1"
+declare -n nraa_update_nm_states_return="$2"
+
+updateModeStates nraa_update_nm_states_core_data nraa_update_nm_states_return
+updateMetaStates nraa_update_nm_states_core_data nraa_update_nm_states_return

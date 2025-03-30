@@ -1,0 +1,7 @@
+## @fn
+##
+## @brief create vector of optional menu items
+##
+## @param1[in]: nraa_create_menu_nm_states: associative array with current navi-men states
+## @param2[out]: nraa_create_menu_return: associative array with items and options by key
+##

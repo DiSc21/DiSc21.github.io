@@ -1,0 +1,20 @@
+if [[ $# -ne 3 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires three arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+local -nr nraa_draw_menu_opts_nm_states="$1"
+local -nr nraa_draw_menu_opts_items="$2"
+local -nr nraa_draw_menu_opts_tmp_dir="$3"
+declare -A options
+getArrayByNamespace "${NS_MENU_OPTIONS}" nraa_draw_menu_opts_items options
+readonly options
+local -r opts_file_path="${nraa_draw_menu_opts_tmp_dir}/${FN_MENU_OPTIONS}"
+
+if [ -z "${nraa_draw_menu_opts_nm_states["${MDKEY_STATE_VIEW_SHOW_OPTIONS}"]}" ]; then
+  printf "Press '%s' to display menu options.\n" "${MK_OPT_SHOW_OPTS}" >"${opts_file_path}"
+else
+  printf "Navi-Men Options:\n" >"${opts_file_path}"
+  for opt in $(tr " " "\n" <<<"${!options[@]}" | sort -u ); do
+    printf "%3s) %-s\n" "${opt}" "${options[${opt}]}" >>"${opts_file_path}"
+  done
+fi

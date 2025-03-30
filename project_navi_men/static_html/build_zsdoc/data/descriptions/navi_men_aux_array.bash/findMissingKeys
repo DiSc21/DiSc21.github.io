@@ -1,0 +1,17 @@
+## @fn
+##
+## @brief Check which elements of the string-array passed as param1 are used
+## as key in the associative string-array param2 and collect those strings
+## - which are NOT used as keys - in the name-referenced string-array param3
+##
+## @note The output is inteded to be also used for the creation of complete error reports
+## when testing/validating configuration jsons. Hence, returning string-list instead of boolean.
+##
+## @param1[in]  nria_find_missing_keys_set: the test list with elements to be checked
+##                                          no assumptions, duplicates allowed, not sorted, ...
+## @param2[in]  nraa_find_missing_keys_map: the associative-array with "check"-keys
+##                                          no assumptions, however, duplicated keys are not possible
+## @param3[out] nria_find_missing_keys_missed_keys: return-list of elements not used as key
+##
+## @throws ERR_WRONG_NUM_OF_INPUTS: for wrong number of arguments
+##

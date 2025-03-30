@@ -1,0 +1,13 @@
+if [[ $# -ne 2 ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_create_menu_nm_states="$1"
+declare -n nraa_create_menu_return="$2"
+declare -A nm_menu_options_by_id
+createMenuOptions nraa_create_menu_nm_states nm_menu_options_by_id
+declare -A nm_menu_items_by_id
+createMenuItems nraa_create_menu_nm_states nm_menu_items_by_id
+nraa_create_menu_return=()
+addNamespacedArray "${NS_MENU_OPTIONS}" nm_menu_options_by_id nraa_create_menu_return
+addNamespacedArray "${NS_MENU_ITEMS}" nm_menu_items_by_id nraa_create_menu_return

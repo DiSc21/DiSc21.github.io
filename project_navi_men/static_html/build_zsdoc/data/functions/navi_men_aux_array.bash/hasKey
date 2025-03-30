@@ -1,0 +1,8 @@
+declare -nr nraa_has_key_array="$1"
+declare -nr nrstr_has_key_search="$2"
+
+if [ -n "${nraa_has_key_array[$nrstr_has_key_search]+who_cares}" ]; then
+  echo "true"
+else
+  echo "false"
+fi

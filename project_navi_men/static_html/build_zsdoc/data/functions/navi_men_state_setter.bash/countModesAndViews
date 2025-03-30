@@ -1,0 +1,28 @@
+if [[ "$#" -ne "2" ]]; then
+  echo -e "${ERROR} (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires two arguments but got '$#'!" 1>&2
+  exit "${ERR_WRONG_NUM_OF_INPUTS}"
+fi
+declare -nr nraa_count_modes_and_views_core_data="$1"
+declare -n nraa_count_modes_and_views_return="$2"
+
+local -r cur_view="${JKEY_CORE_OBJECT_VIEWS}${MULTI_DIM_ARRAY_DELIMITER}${nraa_count_modes_and_views_return["${MDKEY_STATE_VIEW_CURRENT}"]}"
+local -r cur_mode="${JKEY_CORE_OBJECT_MODES}${MULTI_DIM_ARRAY_DELIMITER}${nraa_count_modes_and_views_return["${MDKEY_STATE_MODE_CURRENT}"]}"
+local -r delim="${MULTI_DIM_ARRAY_DELIMITER}"
+
+declare -A aa_mode_data
+declare -A aa_view_data
+
+getArrayByNamespace "${JKEY_CORE_OBJECT_MODES}" nraa_count_modes_and_views_core_data aa_mode_data
+getArrayByNamespace "${JKEY_CORE_OBJECT_VIEWS}" nraa_count_modes_and_views_core_data aa_view_data
+
+readonly aa_mode_data
+readonly aa_view_data
+
+read -ra mode_list <<< "$( tr " " "\n" <<< "${!aa_mode_data[@]}" | sed "s/${delim}.*//" | sort -u | sed ':a;N;$!ba;s/\n/ /g')"
+read -ra view_list <<< "$( tr " " "\n" <<< "${!aa_view_data[@]}" | sed "s/${delim}.*//" | sort -u | sed ':a;N;$!ba;s/\n/ /g')"
+
+nraa_count_modes_and_views_return["${MDKEY_STATE_MODE_NUMBER}"]="${#mode_list[@]}"
+nraa_count_modes_and_views_return["${MDKEY_STATE_VIEW_NUMBER}"]="${#view_list[@]}"
+
+nraa_count_modes_and_views_return["${MDKEY_STATE_MODE_LIST}"]="${mode_list[*]}"
+nraa_count_modes_and_views_return["${MDKEY_STATE_VIEW_LIST}"]="${view_list[*]}"

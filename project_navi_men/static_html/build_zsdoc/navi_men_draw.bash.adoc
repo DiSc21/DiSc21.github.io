@@ -1,0 +1,123 @@
+navi_men_draw.bash(1)
+=====================
+:compat-mode!:
+
+NAME
+----
+navi_men_draw.bash - a shell script
+
+SYNOPSIS
+--------
+Documentation automatically generated with `zsdoc'
+
+FUNCTIONS
+---------
+
+ drawMenu
+ drawMenuItems
+ drawMenuOpts
+ drawMenuPreClear
+ getCursorPos
+
+DETAILS
+-------
+
+Script Body
+~~~~~~~~~~~
+
+Has 17 line(s). No functions are called (may set up e.g. command_not_found_handle or call a function indirectly in other way).
+
+Uses feature(s): _source_
+
+drawMenu
+~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief draw menu
+ #
+ # @param1[in]: : with current navi-men items and options
+____
+
+Has 65 line(s). Calls functions:
+
+ drawMenu
+ |-- drawMenuItems
+ |   `-- navi_men_aux_array.bash/getArrayByNamespace
+ |-- drawMenuOpts
+ |   `-- navi_men_aux_array.bash/getArrayByNamespace
+ `-- drawMenuPreClear
+     `-- getCursorPos
+
+Called by:
+
+ navi_men_run.bash/naviMenRun
+
+drawMenuItems
+~~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief draw menu
+ #
+ # @param1[in]: : with current navi-men items and options
+____
+
+Has 75 line(s). Calls functions:
+
+ drawMenuItems
+ `-- navi_men_aux_array.bash/getArrayByNamespace
+
+Called by:
+
+ drawMenu
+
+drawMenuOpts
+~~~~~~~~~~~~
+
+____
+ 
+ # @fn
+ #
+ # @brief draw menu
+ #
+ # @param1[in]: : with current navi-men items and options
+____
+
+Has 20 line(s). Calls functions:
+
+ drawMenuOpts
+ `-- navi_men_aux_array.bash/getArrayByNamespace
+
+Called by:
+
+ drawMenu
+
+drawMenuPreClear
+~~~~~~~~~~~~~~~~
+
+Has 23 line(s). Calls functions:
+
+ drawMenuPreClear
+ `-- getCursorPos
+
+Called by:
+
+ drawMenu
+
+getCursorPos
+~~~~~~~~~~~~
+
+Has 13 line(s). Doesn't call other functions.
+
+Uses feature(s): _read_
+
+Called by:
+
+ drawMenuPreClear
+ navi_men.bash/main
+
