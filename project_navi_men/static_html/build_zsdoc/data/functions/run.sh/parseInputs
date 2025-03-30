@@ -1,0 +1,20 @@
+if [[ "$#" -eq "0" ]]; then
+  echo -e "Error (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' requires at least one argument!" 1>&2
+  exit 1
+fi
+local -r REQUESTED_PATH="$1"
+shift
+
+local validation_str=""
+
+for task in "${!FUNCTION_BY_CMD[@]}"; do
+  if [[ "${task}" == "${REQUESTED_PATH}" ]]; then
+    validation_str="${task}"
+    "${FUNCTION_BY_CMD[${task}]}" "$*"
+  fi
+done
+
+if [[ -z "${validation_str}" ]]; then
+  echo -e "Error (${0##*/} - ${FUNCNAME[*]}): '${FUNCNAME[0]}' don't know what to do with param '${REQUESTED_PATH}'!" 1>&2
+  exit 1
+fi

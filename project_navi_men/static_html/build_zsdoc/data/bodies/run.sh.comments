@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# shellcheck source-path=SCRIPTDIR
+# shellcheck disable=SC1091
+
+## @fn
+#
+
+# batsify script, i.e. ensure nothing is executed if this file is just sourced/loaded

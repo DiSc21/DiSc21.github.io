@@ -1,0 +1,4 @@
+run.sh/buildDocker:  run.sh/runCommand
+run.sh/dockerBuildCmd:  run.sh/buildDocker
+run.sh/parseInputs:  run.sh/zsd_script_body
+run.sh/startDocker:  run.sh/intoDocker  run.sh/runCommand
